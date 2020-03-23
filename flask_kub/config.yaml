@@ -1,0 +1,16 @@
+apiVersion: apps/v1 # Kubernetes API version
+kind: Deployment # the type of object you want to create
+metadata: # info about the object so that it can be uniquely identified
+  name: flask
+spec: # desired state of the object
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+      - name: flask
+        image: mjhea0/flask-kubernetes:latest
+        ports:
+        - containerPort: 5000
