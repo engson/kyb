@@ -57,8 +57,7 @@ print(c_posts.count_documents(filter={"author":"Mike"}))
 # Find only documents date greater than a specific datetime.
 d = datetime.datetime(2009, 11, 12, 12)
 for post in c_posts.find({"date":{"$gt":d}}).sort("author"):
-    pass
-    #pprint.pprint(post)
+    pprint.pprint(post)
 
 # Indexing
 

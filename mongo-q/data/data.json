@@ -1,18 +1,65 @@
 {
     "books":[
-        {"_id":"b_1", "date_written":"2019-04-09T00:00:00.000+0000",
-            "no_of_books_sold":9, "city":"c_1"},
-        {"_id":"b_2", "date_written":"2019-04-10T00:00:00.000+0000",
-            "no_of_books_sold":4, "city":"c_2"},
-        {"_id":"b_3", "date_written":"2019-04-10T04:00:00.000+0000",
-            "no_of_books_sold":2, "city":"c_2"}
-
+        {
+            "date_written":"2019-01-09T00:00:00.000+0000",
+            "no_of_books_sold":2, "city":"City-A",
+            "author":"abc@live.in"
+        },{
+            "date_written":"2019-02-10T00:00:00.000+0000",
+            "no_of_books_sold":3, "city":"City-B",
+            "author":"def@live.in"
+        },{
+            "date_written":"2019-03-10T04:00:00.000+0000",
+            "no_of_books_sold":5, "city":"City-B",
+            "author":"abc@live.in"
+        },{
+            "date_written":"2019-04-10T04:00:00.000+0000",
+            "no_of_books_sold":7, "city":"City-B",
+            "author":"ghi@live.in"
+        },{
+            "date_written":"2019-05-10T04:00:00.000+0000",
+            "no_of_books_sold":11, "city":"City-C",
+            "author":"ghi@live.in"
+        },{
+            "date_written":"2019-06-10T04:00:00.000+0000",
+            "no_of_books_sold":13, "city":"City-D",
+            "author":"mno@live.in"
+        },{
+            "date_written":"2019-07-10T04:00:00.000+0000",
+            "no_of_books_sold":17, "city":"City-D",
+            "author":"jkl@live.in"
+        },
+        {
+            "date_written":"2019-08-10T04:00:00.000+0000",
+            "no_of_books_sold":19, "city":"City-D",
+            "author":"jkl@live.in"
+        },{
+            "date_written":"2019-09-10T04:00:00.000+0000",
+            "no_of_books_sold":23, "city":"City-D",
+            "author":"jkl@live.in"
+        },{
+            "date_written":"2019-10-10T04:00:00.000+0000",
+            "no_of_books_sold":29, "city":"City-D",
+            "author":"jkl@live.in"
+        },{
+            "date_written":"2019-11-10T04:00:00.000+0000",
+            "no_of_books_sold":31, "city":"City-E",
+            "author":"mno@live.in"
+        }
     ],
     "authors":[
-        {"_id":"a_1", "email":"xyz@live.in", "city":"c_1"},
-        {"_id":"a_2", "email":"123@live.in", "city":"c_2"}
+        {"email":"abc@live.in", "city":"City-A"},
+        {"email":"def@live.in", "city":"City-B"},
+        {"email":"ghi@live.in", "city":"City-C"},
+        {"email":"jkl@live.in", "city":"City-D"},
+        {"email":"mno@live.in", "city":"City-E"}
     ],
     "cities":[
-        {"_id":"c_1","name":"City-A"},{"_id":"c_2","name":"City-B"}]
+        {"name":"City-A"},
+        {"name":"City-B"},
+        {"name":"City-C"},
+        {"name":"City-D"},
+        {"name":"City-E"}
+    ]
 
 }
