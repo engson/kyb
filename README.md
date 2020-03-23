@@ -48,10 +48,11 @@ Kybernetes Home office
 - [] Install docker-ce 
 
 
-## Dag 23.3.20 kl 9:00
+## Dag 23.3.20 kl 9:00 - 17:45
 - [x] Aggregate in Mongodb: https://medium.com/@paulrohan/aggregation-in-mongodb-8195c8624337
 - [x] Mongo Aggregations in 5 Minutes: https://engineering.universe.com/mongo-aggregations-in-5-minutes-b8e1d9c274bb
-- [] Chanter 4: Quering: https://www.oreilly.com/library/view/mongodb-the-definitive/9781449344795/ch04.html
+- [x] Chanter 4: Quering: https://www.oreilly.com/library/view/mongodb-the-definitive/9781449344795/ch04.html
+
 
 
 ### Backlog

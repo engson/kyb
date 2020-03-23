@@ -145,16 +145,117 @@ def aggregate_books():
     ]
 
     result = books.aggregate(pipeline)
-
+    print("Books written by")
     pprint(list(result))
+
+    # Cont aggregation
+    # Find all books written by author from same city.
+
+
+    pipeline_test = [  
+        { 
+            "$lookup": {
+                "from": "authors",
+                "localField":"author",
+                "foreignField":"_id",
+                "as": "ref_author",
+            }
+        },
+        {
+            "$unwind":"$ref_author"
+        },
+        {
+            "$match": {
+                "$expr": {
+                    "$eq": ["$city", "$ref_author.city"]
+                }
+            }
+        },
+        {
+            "$project": {
+                "_id":1,
+                "no_of_books_sold":1
+            }
+
+        }
+    ]   
+
+    result_test = books.aggregate(pipeline_test)
+    print("Books same authors")
+    pprint(list(result_test))
+
+    # Find number of books each author have sold
+
+    pipeline_test = [  
+        {
+            "$lookup": {
+                "from": "authors",
+                "localField":"author",
+                "foreignField":"_id",
+                "as": "ref_author",
+            }
+        },
+        {
+            "$unwind": "$ref_author"
+        },
+        {
+            "$group": { 
+                "_id":"$ref_author",
+                "total_books_sold": {
+                    "$sum": "$no_of_books_sold"
+                }
+            }
+        },{
+            "$project":{
+                "total_books_sold":"$total_books_sold",
+                "email":"$_id.email",
+                "_id":"$_id._id"
+                
+            }
+        }
+
+    ]
+    
+    result_test = books.aggregate(pipeline_test)
+    print("Books authors")
+    pprint(list(result_test))
+
 
 def query_books():
 
-    
+    # Count number of books availible.
+    book_count = books.count_documents(filter={})
+    print("num of books", book_count)
+
+    # Want to find all books with specific author
+
+    query_no_books = {
+        "no_of_books_sold": {
+                "$lt": 5
+            }
+    }
+
+    result = books.find(query_no_books)
+    print("Query_no_books:")
+    pprint(list(result))
 
 
-    pass
+    result = books.find({}).sort([("date_written",pymongo.DESCENDING)]).limit(2)
+    print("Query sort limit:")
+    pprint(list(result))
+
+    # Wrappers
+    result = books.find({}).max_time_ms(1)
+    print("Query wrap max time ms:")
+    pprint(list(result))
+
+    # Snapshot depricated: use hint { _id: 1} instead, 
+    #   to prevent cursor from returning a document more than once. 
+
+    # runCommand({"drop":"test"}) 
+
 
 if __name__ == "__main__": # Only ran when this is main module (not imported)
-    init_db(True)
+    init_db()
     aggregate_books()
+    #query_books()
