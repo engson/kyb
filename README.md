@@ -3,18 +3,18 @@ Kybernetes Home office
 
 ## Dag 19.3.20 8:30 - 16:30
 
-- [ ] Setup work enviroment
+- [x] Setup work enviroment
     - [x] Install VurtualBox guest additions
     - [x] Install Centos8 on virtualBox
     - [x] Install TMUX
     - [x] Install minoconda
-    - [x] Install Minikube (single-node Kubernetes) # https://kubernetes.io/docs/tasks/tools/install-kubectl/
+    - [x] Install Minikube (single-node Kubernetes) <https://kubernetes.io/docs/tasks/tools/install-kubectl/>
         - [x] None-empty `grep -E --color 'vmx|svm' /proc/cpuinfo` 
             - [x] Enable Nested VT-x/AMD-V VB manager
-    - [x] Install Kubernetes # https://phoenixnap.com/kb/how-to-install-kubernetes-on-centos
+    - [x] Install Kubernetes <https://phoenixnap.com/kb/how-to-install-kubernetes-on-centos>
         - [x] Install kubectl
     - [x] Setup SSH key on github
-    - [x] Setup postman # https://tutorialforlinux.com/2019/09/26/how-to-install-postman-on-centos-8-easy-guide/2/
+    - [x] Setup postman  <https://tutorialforlinux.com/2019/09/26/how-to-install-postman-on-centos-8-easy-guide/2/>
     - [x] Fix not enough space on root disk (16 G too small!)
         - [x] Install gparted `sudo dnf install gparted`
         - [x] Extend partition in VirtualBox
@@ -30,7 +30,7 @@ Kybernetes Home office
     - [x] Install Flask
     - [x] Install pymongo
     - [x] Install redis
-    - [ ] Install Hamcrest
+    - [-] Install Hamcrest
 - [x] Install Vscode
     - [x] Python extension
     - [x] Yaml extension
@@ -39,23 +39,23 @@ Kybernetes Home office
 
 ## Dag 20.3.20 kl 9:30
 
-- [x] Kubernetes architecture overview: https://www.youtube.com/watch?v=8C_SCDbUJTg
-- [x] Follow Basic Tutorial: https://api.mongodb.com/python/current/tutorial.html
+- [x] Kubernetes architecture overview: <https://www.youtube.com/watch?v=8C_SCDbUJTg>
+- [x] Follow Basic Tutorial: <https://api.mongodb.com/python/current/tutorial.html>
 - [x] Setup Mongodb client
-    - [x] Install mongodb: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/
-- [] Aggregate in Mongodb: https://medium.com/@paulrohan/aggregation-in-mongodb-8195c8624337
-- [x] Aggregation Mongod: https://docs.mongodb.com/manual/aggregation/
-- [] Install docker-ce 
-
+    - [x] Install mongodb: <https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/>
+    - [x] Install python-dateutil: <https://pypi.org/project/python-dateutil/>
+- [x] Aggregate in Mongodb: <https://medium.com/@paulrohan/aggregation-in-mongodb-8195c8624337>
+- [x] Aggregation Mongod: <https://docs.mongodb.com/manual/aggregation/>
 
 ## Dag 23.3.20 kl 9:00 - 17:45
-- [x] Aggregate in Mongodb: https://medium.com/@paulrohan/aggregation-in-mongodb-8195c8624337
-- [x] Mongo Aggregations in 5 Minutes: https://engineering.universe.com/mongo-aggregations-in-5-minutes-b8e1d9c274bb
-- [x] Chanter 4: Quering: https://www.oreilly.com/library/view/mongodb-the-definitive/9781449344795/ch04.html
+- [x] Aggregate in Mongodb: <https://medium.com/@paulrohan/aggregation-in-mongodb-8195c8624337>
+- [x] Mongo Aggregations in 5 Minutes: <https://engineering.universe.com/mongo-aggregations-in-5-minutes-b8e1d9c274bb>
+- [x] Chanter 4: Quering: <https://www.oreilly.com/library/view/mongodb-the-definitive/9781449344795/ch04.html>
 
 ## Dag 24.3.20 kl 9:15
-- [x] Installing Podman-docker <https://thenewstack.io/check-out-podman-red-hats-daemon-less-docker-alternative/>
-    `sudo dnf install @container-tools` breauk system?
+- [?] Installing Podman-docker <https://thenewstack.io/check-out-podman-red-hats-daemon-less-docker-alternative/>
+    `sudo dnf install @container-tools` 
+- [x] Install podman <https://podman.io/getting-started/installation>
 - [x] Basic Setup and Use of podman <https://podman.io/getting-started/>
 ```cmd
 podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CONF_D_PATH=/etc/httpd/conf.d \
@@ -126,7 +126,7 @@ Allows to run commands against Kubernetes clusters.
 `kubectl delete node <nodename>` : delete node from cluster
 
 ## Kubernetes Architecture
-https://phoenixnap.com/kb/understanding-kubernetes-architecture-diagrams
+<https://phoenixnap.com/kb/understanding-kubernetes-architecture-diagrams>
 
 ![kubernetes architecture](images/full-kubernetes-model-architecture.png)
 
