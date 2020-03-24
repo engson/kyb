@@ -53,6 +53,19 @@ Kybernetes Home office
 - [x] Mongo Aggregations in 5 Minutes: https://engineering.universe.com/mongo-aggregations-in-5-minutes-b8e1d9c274bb
 - [x] Chanter 4: Quering: https://www.oreilly.com/library/view/mongodb-the-definitive/9781449344795/ch04.html
 
+## Dag 24.3.20 kl 9:15
+- [x] Installing Podman-docker <https://thenewstack.io/check-out-podman-red-hats-daemon-less-docker-alternative/>
+    `sudo dnf install @container-tools` breauk system?
+- [x] Basic Setup and Use of podman <https://podman.io/getting-started/>
+```cmd
+podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CONF_D_PATH=/etc/httpd/conf.d \
+                  -e HTTPD_MAIN_CONF_PATH=/etc/httpd/conf \
+                  -e HTTPD_CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/httpd/ \
+                  registry.fedoraproject.org/f29/httpd /usr/bin/run-httpd
+```
+
+- [] Snapshot of current build
+- [] Git push changes before shutdown.
 
 
 ### Backlog
@@ -64,6 +77,17 @@ Kybernetes Home office
 - [ ] Setup Redis with mongodb
 - [ ] Connect Backend with Frontend
 - [ ] Setup keycloak
+
+## Podman
+`podman pull images`: First check registry.redhat.io for latest image, then docker.io if not there.
+`podman images`: List images availible.
+`podman rmi ID`: Delete images on ID tag
+`podman rm ID`: Delete container _'-f'_ to force already running containers.
+`podman inspect ID`:  Inspect '-l' latest running or ID container for metadata.
+`podman logs ID`: View container's logs.
+`podman top ID`: View container's top statuses (CPU %, PID etc)
+`sudo podman container checkpoint ID`: Stop and store state of a container for later use.
+`sudo podman container restore ID`: Restore container at the exact same state as checkpoint.
 
 ## mongodb queries
 `db.collection.find({query})`:  
