@@ -6,7 +6,6 @@ kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kube
 
 kubectl get deployments
 
-echo -e "\n\n\n\e[92mStarting Proxy. After starting it will not output a response. Please click the first Terminal Tab\n"; 
 kubectl proxy
 
 curl http://localhost:8001/version

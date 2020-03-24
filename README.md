@@ -73,8 +73,9 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
                   -e HTTPD_CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/httpd/ \
                   registry.fedoraproject.org/f29/httpd /usr/bin/run-httpd
 ```
-- [] Multi-container pods and pod communication <https://www.mirantis.com/blog/multi-container-pods-and-container-communication-in-kubernetes/>
-- [] Configure pod initialization <https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-initialization/>
+- [-] Multi-container pods and pod communication <https://www.mirantis.com/blog/multi-container-pods-and-container-communication-in-kubernetes/>
+- [x] Configure pod initialization <https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-initialization/>
+- [x] Proxy access to kubernets api <https://kubernetes.io/docs/tasks/access-kubernetes-api/http-proxy-access-api/>
 
 - [] Snapshot of current build
 - [] Git push changes before shutdown.
@@ -131,16 +132,24 @@ Once started: `kubectl`
 Allows to run commands against Kubernetes clusters.  
 `kubectl cluster-info` : Details of the cluster and its health status  
 `kubectl get po(ds) -A` : See all pod state  
+    `-l`: label. `-o`: output
 `kubectl get nodes` : view the nodes in the cluster  
 `kubectl get pv` : Get persistent volume  
 
 `kubectl get deployments`: Get availible deploymnents. A Deployment provides declarative updates for Pods and ReplicaSets. 
+`kubectl get svc <name>`: Get services on label name
 
 `kubectl drain <nodename>` : evict all user pods from the node  
 `kubectl delete node <nodename>` : delete node from cluster  
+`kubectl delete pods <podname>`: Delete specific pod. _'-f'_ to force
 
-`kubectl proxy`: Create proxy that forward communications into the cluster-wide, private network.  
+`kubectl proxy`: Create proxy that forward communications into the cluster-wide, private network, to the Kubernetes API. 
 `kubectl config view`: Check the location and credentials that kubectl knows about.  
+
+`kubectl apply -f pod_config.yaml`: Apply config file _--record_ flag to save the kubectl command that is making changes to the resource.
+
+`kubectl describe x`: Show details of a specific resource or group of resources
+`kubectl scale deployment <deploymnt> --replicas=x`: Adjusy replica count on deployment.
 
 ## Kubernetes
 
