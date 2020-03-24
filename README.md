@@ -43,8 +43,8 @@ Kybernetes Home office
 - [x] Follow Basic Tutorial: <https://api.mongodb.com/python/current/tutorial.html>
 - [x] Setup Mongodb client
     - [x] Install mongodb: <https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/>
-        ```
-        cat >/etc/yum.repos.d/mongodb-org-4.2.repo <<EOL
+```repo
+cat >/etc/yum.repos.d/mongodb-org-4.2.repo <<EOL
 [mongodb-org-4.2]
 name=MongoDB Repository
 baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
@@ -52,7 +52,7 @@ gpgcheck=1
 enabled=1
 gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc
 EOL
-        ```
+```
     - [x] Install python-dateutil: <https://pypi.org/project/python-dateutil/>
 - [x] Aggregate in Mongodb: <https://medium.com/@paulrohan/aggregation-in-mongodb-8195c8624337>
 - [x] Aggregation Mongod: <https://docs.mongodb.com/manual/aggregation/>
