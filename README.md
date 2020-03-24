@@ -30,6 +30,7 @@ Kybernetes Home office
     - [x] Install Flask
     - [x] Install pymongo
     - [x] Install redis
+    - [x] Install python-dateutil: <https://pypi.org/project/python-dateutil/>
     - [-] Install Hamcrest
 - [x] Install Vscode
     - [x] Python extension
@@ -53,7 +54,6 @@ enabled=1
 gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc
 EOL
 ```
-    - [x] Install python-dateutil: <https://pypi.org/project/python-dateutil/>
 - [x] Aggregate in Mongodb: <https://medium.com/@paulrohan/aggregation-in-mongodb-8195c8624337>
 - [x] Aggregation Mongod: <https://docs.mongodb.com/manual/aggregation/>
 
