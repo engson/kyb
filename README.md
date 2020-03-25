@@ -1,41 +1,41 @@
 # Home office tasks
-Kybernetes Home office
+
+Home office
 
 ## Dag 19.3.20 8:30 - 16:30
 
 - [x] Setup work enviroment
-    - [x] Install VurtualBox guest additions
-    - [x] Install Centos8 on virtualBox
-    - [x] Install TMUX
-    - [x] Install minoconda
-    - [x] Install Minikube (single-node Kubernetes) <https://kubernetes.io/docs/tasks/tools/install-kubectl/>
-        - [x] None-empty `grep -E --color 'vmx|svm' /proc/cpuinfo` 
+  - [x] Install VurtualBox guest additions
+  - [x] Install Centos8 on virtualBox
+  - [x] Install TMUX
+  - [x] Install minoconda
+  - [x] Install Minikube (single-node Kubernetes) <https://kubernetes.io/docs/tasks/tools/install-kubectl/>
+        - [x] None-empty `grep -E --color 'vmx|svm' /proc/cpuinfo`
             - [x] Enable Nested VT-x/AMD-V VB manager
     - [x] Install Kubernetes <https://phoenixnap.com/kb/how-to-install-kubernetes-on-centos>
-        - [x] Install kubectl
+      - [x] Install kubectl
     - [x] Setup SSH key on github
     - [x] Setup postman  <https://tutorialforlinux.com/2019/09/26/how-to-install-postman-on-centos-8-easy-guide/2/>
     - [x] Fix not enough space on root disk (16 G too small!)
-        - [x] Install gparted `sudo dnf install gparted`
-        - [x] Extend partition in VirtualBox
-        - [x] Extend partiton table with 16.23 GiB more
-            - [x] `lvextend -L +16.23GiB /dev/mapper/cl-root`
-            - [x] `partprobe`
-            - [x] `xfs_growfs /`
+      - [x] Install gparted `sudo dnf install gparted`
+      - [x] Extend partition in VirtualBox
+      - [x] Extend partiton table with 16.23 GiB more
+        - `lvextend -L +16.23GiB /dev/mapper/cl-root`
+        - `partprobe`
+        - `xfs_growfs /`
 - [x] Setup conda enviroment "kubec"  
 `conta create -n kubec python=3.6 pip`  
 `source activate kubec`  
 `source deactivate`  
-    - [x] Install Python v3.6
-    - [x] Install Flask
-    - [x] Install pymongo
-    - [x] Install redis
-    - [x] Install python-dateutil: <https://pypi.org/project/python-dateutil/>
-    - [-] Install Hamcrest
+  - [x] Install Python v3.6
+  - [x] Install Flask
+  - [x] Install pymongo
+  - [x] Install redis
+  - [x] Install python-dateutil: <https://pypi.org/project/python-dateutil/>
+  - [-] Install Hamcrest
 - [x] Install Vscode
-    - [x] Python extension
-    - [x] Yaml extension
-    
+  - [x] Python extension
+  - [x] Yaml extension
 - [x] Follow Tutorial to learn basics of Kubernetes
 
 ## Dag 20.3.20 kl 9:30
@@ -43,7 +43,8 @@ Kybernetes Home office
 - [x] Kubernetes architecture overview: <https://www.youtube.com/watch?v=8C_SCDbUJTg>
 - [x] Follow Basic Tutorial: <https://api.mongodb.com/python/current/tutorial.html>
 - [x] Setup Mongodb client
-    - [x] Install mongodb: <https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/>
+  - [x] Install mongodb: <https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/>
+
 ```repo
 cat >/etc/yum.repos.d/mongodb-org-4.2.repo <<EOL
 [mongodb-org-4.2]
@@ -54,25 +55,30 @@ enabled=1
 gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc
 EOL
 ```
+
 - [x] Aggregate in Mongodb: <https://medium.com/@paulrohan/aggregation-in-mongodb-8195c8624337>
 - [x] Aggregation Mongod: <https://docs.mongodb.com/manual/aggregation/>
 
 ## Dag 23.3.20 kl 9:00 - 17:45
+
 - [x] Aggregate in Mongodb: <https://medium.com/@paulrohan/aggregation-in-mongodb-8195c8624337>
 - [x] Mongo Aggregations in 5 Minutes: <https://engineering.universe.com/mongo-aggregations-in-5-minutes-b8e1d9c274bb>
 - [x] Chanter 4: Quering: <https://www.oreilly.com/library/view/mongodb-the-definitive/9781449344795/ch04.html>
 
 ## Dag 24.3.20 kl 9:15 - 17:15
+
 - [?] Installing Podman-docker <https://thenewstack.io/check-out-podman-red-hats-daemon-less-docker-alternative/>
-    `sudo dnf install @container-tools` 
+    `sudo dnf install @container-tools`
 - [x] Install podman <https://podman.io/getting-started/installation>
 - [x] Basic Setup and Use of podman <https://podman.io/getting-started/>
+
 ```cmd
 podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CONF_D_PATH=/etc/httpd/conf.d \
                   -e HTTPD_MAIN_CONF_PATH=/etc/httpd/conf \
                   -e HTTPD_CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/httpd/ \
                   registry.fedoraproject.org/f29/httpd /usr/bin/run-httpd
 ```
+
 - [-] Multi-container pods and pod communication <https://www.mirantis.com/blog/multi-container-pods-and-container-communication-in-kubernetes/>
 - [x] Configure pod initialization <https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-initialization/>
 - [x] Proxy access to kubernets api <https://kubernetes.io/docs/tasks/access-kubernetes-api/http-proxy-access-api/>
@@ -81,26 +87,58 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 - [x] Git push changes before shutdown.
 
 ## Dag 25.03.20 kl 9:30
-- [] Connecting Applications with Services <https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/>
 
+- [x] Connecting Applications with Services <https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/>
+
+    ```bash
+        # Create a public private key pair
+        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /keys/nginx.key -out /keys/nginx.crt -subj "/CN=my-nginx/O=my-nginx"
+        # Convert the keys to base64 encoding
+        cat /d/tmp/nginx.crt | base64
+        cat /d/tmp/nginx.key | base64
+    ```
+
+    1. `kubectl create configmap nginxconfigmap --from-file=default.conf`
+        1. `mdir /etc/nginx/ssl | cp keys/* /etc/nginx/ssl/`
+    2. `kubectl apply -f nginxsecrets.yaml`: nginxsecret
+    3. `kubectl delete deployments,svc my-nginx; kubectl create -f ./nginx-secure-app.yaml`: Delete deployments and services with name 'my-nginx'.
+        - Volume mapping to other resource (Not local files)
+    4. `kubectl get pods -l run=my-nginx -o yaml | grep -i podip` IP-pod
+    5. `kubectl apply -f curlpod.yaml`
+    6. `kubectl exec -it curl-deployment-<rest> -- bin/sh`
+        1. `curl -k https://IP-pod`
+    7. LoadBalancer not availible in Minikube.  
+  - [x] Install go <https://computingforgeeks.com/how-to-install-go-on-rhel-8/>
+  - [x] Corrupt GIT data <https://stackoverflow.com/questions/4254389/git-corrupt-loose-object/13918515#13918515?newreg=7082361fbc474a77b63e977aa8a80ff0>
+- [x] xclip <https://computingforgeeks.com/how-to-copy-and-paste-text-in-a-linux-terminal/>
+- [*] Setup kubernetes cluster
+- [x] Container images <https://blog.giantswarm.io/building-container-images-with-podman-and-buildah/>
+  - Podman use Dockerfiles to build images, or can use buildah syntax when Dockerfile is too restrictive (i.e. script-like approach).
+- [] Git push changes before shutdown.
+
+## Dag 25.03.20
+
+- [] Git push changes before shutdown.
 
 ### Backlog
-- [ ] Setup kubernetes cluster
-- [ ] Setup feature flags on kubernetes
+
+- [ ] Setup feature flags on kubernetes  
 - [ ] Setup feature flags on flask  
-- [ ] Setup Flask Backend
-- [ ] Setup Flask Frontend
-- [ ] Setup Redis with mongodb
-- [ ] Connect Backend with Frontend
-- [ ] Setup keycloak
+- [ ] Setup Flask Backend  
+- [ ] Setup Flask Frontend  
+- [ ] Setup Redis with mongodb  
+- [ ] Connect Backend with Frontend  
+- [ ] Setup keycloak  
+- [ ] Prometheus monitoring Kubernetes. <https://sysdig.com/blog/kubernetes-monitoring-prometheus/>
 
 ### Kubernetes Architecture
+
 <https://phoenixnap.com/kb/understanding-kubernetes-architecture-diagrams>
 
 ![kubernetes architecture](images/full-kubernetes-model-architecture.png)
 
+#### Steps in a basic Kubernetes process
 
-#### Steps in a basic Kubernetes process.
 1. An administrator creates and places the desired state of an application into a mnanifest file (yml).
 2. The file provided to the Kubernetes API Server using a CLI or UI. Kubernetes command-line tool called __kubectl__
 3. Kubernetes stores the file (an application's desired state) in a database called the __Key-Value Store (etcd)__.
@@ -111,9 +149,9 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 
 ![master node](images/kubernetes-master-elements.png)
 
-* Recives input from a CLI or UI via an API.
-* Define pods, replica sets, and services that you want Kubernetes to maintain.
-* Provide the parameters of the desired state for the application(s) runnin in that cluster.
+- Recives input from a CLI or UI via an API.
+- Define pods, replica sets, and services that you want Kubernetes to maintain.
+- Provide the parameters of the desired state for the application(s) runnin in that cluster.
 
 ##### API server
 
@@ -122,28 +160,28 @@ Internal system components, as well as external user components, all communicate
 
 ##### Key-value Store (etcd)
 
-The database Kubernetes uses to back-up all cluster data. It stores the entire configuration and state of the cluster.   
+The database Kubernetes uses to back-up all cluster data. It stores the entire configuration and state of the cluster.  
 The master node queries __etcd__ to retrieve parameters for the sate of the nodes, pods and containers.
 
 ##### Controller
 
-Role: Obtain the desired state from the API Server. Checks the current state of the nodes it is tasked to control, and determines if there are any differences, and resolves them, if any.
+Role: Obtain the desired state from the API Server. Checks the current state of the nodes it is tasked to control, and determines if there are any differences, and resolves them, if any.  
 
 ##### Scheduler
 
-Watches for new requests coming from the API server and assings them to healty nodes. 
+Watches for new requests coming from the API server and assings them to healty nodes.  
 Ranks the quality of the nodes and deploys pods to the best-suited node. If there are no suitable nodes, the pods are put in a pending state until such a node appears.
 
 #### Worked Node
 
-Listen to the API server for new work assignments. 
+Listen to the API server for new work assignments.  
 They execute the work assignments and then report the results back to the Kubernetes Master node.
 
 ##### Kubelet
 
-Runs on every node in the cluster. It is the principal Kubernetes agent, by installing kubelet, the node's CPU, RAM, and storage become part of the broader cluster. 
+Runs on every node in the cluster. It is the principal Kubernetes agent, by installing kubelet, the node's CPU, RAM, and storage become part of the broader cluster.  
 It watches for tasks sent from the API Server, executes the task, and reports back to the Master.  
-Monitors pods and reports back to the control panel if a pod is not fully functional. 
+Monitors pods and reports back to the control panel if a pod is not fully functional.  
 Based in this information, the Master can then decide how to allocate tasks and resources to reach the desired state.
 
 ##### Container Runtime
@@ -153,25 +191,24 @@ A 3rd party software or plugin, such as Docker, usually performs this function.
 
 ##### Kube-proxy
 
-Makes sure that each node gets its IP adress, implements local _iptables_  and rules to handle routing and traffic load-balancing.
+Makes sure that each node gets its IP adress, implements local _iptables_  and rules to handle routing and traffic load-balancing.  
 
 ##### Pod
 
 ![Pod](images/container-pod-deplyment-kubernetes.png)
 
-Smalles element of scheduling in Kubernetes. Without it, a container cannot be part of a cluster. 
-The pods serves as a 'wrapper' for a single container with the application code. Based on the availability of the resources, the Master schedules the pod on a specific node and coordinates with the container runtime to launch the container.
+Smalles element of scheduling in Kubernetes. Without it, a container cannot be part of a cluster.  
+The pods serves as a 'wrapper' for a single container with the application code. Based on the availability of the resources, the Master schedules the pod on a specific node and coordinates with the container runtime to launch the container.  
 
-If pods unexpectedly fail to perform their tasks, Kubernetes creates and starts a new pod in its place. The pod is a replica, expect for the DNS and IP address.
+If pods unexpectedly fail to perform their tasks, Kubernetes creates and starts a new pod in its place. The pod is a replica, expect for the DNS and IP address.  
 
-Pods need to be desidned so that an entirely new pod, created anywhere within the cluster, can seamlessly take its place. __Services__ assist in this process.
+Pods need to be desidned so that an entirely new pod, created anywhere within the cluster, can seamlessly take its place. __Services__ assist in this process.  
 
 ##### Services
 
 __Services__ are introduces to provide reliable networking by bringing stable IP addresses and DNS names to the unstable world of pods.
 
 Pods are associated with services through key-value pairs called __labels__ and __selectors__. A service automatically discovers a new pod with labels that match the selector. This also removes terminated pods from the cluster.
-
 
 ## Podman
 
@@ -192,7 +229,7 @@ Pods are associated with services through key-value pairs called __labels__ and 
 `db.collection.insert_many([{}])`: Insert multiple documents at once. (Not one after the other).  
 `db.collection.create_index([('user_id', pymongo.ASCENDING)],unique=True)`:  Unique index per document.  
 
-__Operators__ come in three varities: __stages__,__expressions__, and __accumulators__. 
+__Operators__ come in three varities: __stages__,__expressions__, and __accumulators__.  
 
 ### Aggregastion
 
@@ -215,28 +252,32 @@ Once started: `kubectl`
 
 `minikube config set memory x` : increase memory beyond just default 2 GB.  
 
-#### Kubectl - Kubernetes command-line tool.
+#### Kubectl - Kubernetes command-line tool
 
 Allows to run commands against Kubernetes clusters.  
 `kubectl cluster-info` : Details of the cluster and its health status  
+`kubectl get <kind>`: kinds:{pods, nodes, secrets, deployments, pv}  
 `kubectl get po(ds) -A` : See all pod state  
     `-l`: label. `-o`: output
 `kubectl get nodes` : view the nodes in the cluster  
 `kubectl get pv` : Get persistent volume  
 
-`kubectl get deployments`: Get availible deploymnents. A Deployment provides declarative updates for Pods and ReplicaSets. 
+`kubectl get deployments`: Get availible deploymnents. A Deployment provides declarative updates for Pods and ReplicaSets.  
 `kubectl get (svc|services) <name>`: Get services on label name
 
 `kubectl drain <nodename>` : evict all user pods from the node  
 `kubectl delete node <nodename>` : delete node from cluster  
-`kubectl delete pods <podname>`: Delete specific pod. _'-f'_ to force
+`kubectl delete pods <podname>ls`: Delete specific pod. _'-f'_ to force
 
-`kubectl proxy`: Create proxy that forward communications into the cluster-wide, private network, to the Kubernetes API. 
+`kubectl proxy`: Create proxy that forward communications into the cluster-wide, private network, to the Kubernetes API.  
 `kubectl config view`: Check the location and credentials that kubectl knows about.  
 
 `kubectl apply -f pod_config.yaml`: Apply config file _--record_ flag to save the kubectl command that is making changes to the resource.
 
 `kubectl describe x`: Show details of a specific resource or group of resources
+
+`kubectl get secrets`: Get secrets
+`kubectl exec -it shell-demo -- /bin/bash`: Get bash shell to running container
 
 ##### Deployment
 
@@ -244,7 +285,7 @@ Allows to run commands against Kubernetes clusters.
 
 ## Kubernetes
 
-Pods that are running inside Kubernetes are running on a private, isolated network. By default they are visible from other pods and services within the same kubernetes cluster, but not outside that network. 
+Pods that are running inside Kubernetes are running on a private, isolated network. By default they are visible from other pods and services within the same kubernetes cluster, but not outside that network.  
 
 ### DNS lookup
 
