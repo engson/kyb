@@ -114,11 +114,27 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 - [*] Setup kubernetes cluster
 - [x] Container images <https://blog.giantswarm.io/building-container-images-with-podman-and-buildah/>
   - Podman use Dockerfiles to build images, or can use buildah syntax when Dockerfile is too restrictive (i.e. script-like approach).
+- [x] Git push changes before shutdown.
+
+## Dag 26.03.20 9:45 
+
+- [x] VBox snapshot
+- [x] Style bash PS1 <https://www.cyberciti.biz/faq/bash-shell-change-the-color-of-my-shell-prompt-under-linux-or-unix/>
+- [-] Services <https://kubernetes.io/docs/concepts/services-networking/service/>
+- [x] Ingress <https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/>
+  - `minikube addons enable ingress` No ADDRESS if not enabled
+    - Verify with `kubectl get pods -n kube-system` give nginx-ingress-controller.
+    - Add Ingress IP to /etc/hosts, `IP host-name`
+- [x] Enable kubectl autocompletion <https://kubernetes.io/docs/tasks/tools/install-kubectl/>
+  - as root user: `kubectl completion bash >/etc/bash_completion.d/kubectl`
+- [x] Flask-vue-kubernetes <https://testdriven.io/blog/running-flask-on-kubernetes/>
+
+
 - [] Git push changes before shutdown.
 
-## Dag 25.03.20
-
-- [] Git push changes before shutdown.
+## Dag 27.03.20 
+- [] Persistent Volume / Persisten Volume Claim
+- [] Running MongoDB on Kubernetes with StatefulSets <https://kubernetes.io/blog/2017/01/running-mongodb-on-kubernetes-with-statefulsets/>
 
 ### Backlog
 
@@ -136,6 +152,22 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 <https://phoenixnap.com/kb/understanding-kubernetes-architecture-diagrams>
 
 ![kubernetes architecture](images/full-kubernetes-model-architecture.png)
+
+#### Deployments
+
+An Api object that manages a replicated application.  
+Provides declarative updates for Pods and ReplicateSets(replica set of pods)
+
+#### Ingress
+
+Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. Traffic routing is controlled by rules defined on the Ingress resource.
+```
+    internet
+        |
+  [ Ingress ]
+  --|-----|--
+  [ Services ]
+```
 
 #### Steps in a basic Kubernetes process
 
@@ -240,20 +272,24 @@ A Pipeline.
 
 `minikube start` : Start cluster  
 `minikube dashboard` : Access the Kubernetes Dashboard running within the minikube cluster.  
+`minikube ip`: Get Node IP
 `minikube stop` : Stop local cluster  
-`minikube delete` : Delete local cluster  
+`minikube delete` : Removes a local Kubernetes cluster
 `minikube delete --all` : Delete all local clusters and profiles  
 
 Once started: `kubectl`  
 `kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.4` : Start server.  
 `kubectl expose deployment hello-minikube --type=NodePort --port=8080` : Exposing a service as a NodePort.  
 `minikube service hello-minikube` : Open exposed endpoin in your browser.  
+`minikube service <service> --url`: Show URLs of service
+`minikube service list`: Show all info of the services in list.
+
 `minikube start -p cluster2` : Start second local cluster (only with bare-metal/none driver).  
 
 `minikube config set memory x` : increase memory beyond just default 2 GB.  
 
 #### Kubectl - Kubernetes command-line tool
-
+`kubectl version`: Display the kubectl version
 Allows to run commands against Kubernetes clusters.  
 `kubectl cluster-info` : Details of the cluster and its health status  
 `kubectl get <kind>`: kinds:{pods, nodes, secrets, deployments, pv}  
@@ -275,9 +311,13 @@ Allows to run commands against Kubernetes clusters.
 `kubectl apply -f pod_config.yaml`: Apply config file _--record_ flag to save the kubectl command that is making changes to the resource.
 
 `kubectl describe x`: Show details of a specific resource or group of resources
+`kubectl describe node`: Show attributes of node (CPU/RAM usage etc).
 
 `kubectl get secrets`: Get secrets
 `kubectl exec -it shell-demo -- /bin/bash`: Get bash shell to running container
+
+Get name of a pod (if only one)
+`kubectl get pod -l service=postgres -o jsonpath="{.items[0].metadata.name}"`
 
 ##### Deployment
 
@@ -294,3 +334,8 @@ kubectl apply -f curl-pod.yaml # Create resource from file.
 kubectl attack curl -i  # Attatch to running container
 root@curl:/ nslookup my-ngnix
 ```
+
+## Postgres
+`\l` List tables
+`\c collection` Use collection.
+`select * from collection`: Get all data records in collection.
