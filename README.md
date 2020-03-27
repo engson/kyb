@@ -116,7 +116,7 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
   - Podman use Dockerfiles to build images, or can use buildah syntax when Dockerfile is too restrictive (i.e. script-like approach).
 - [x] Git push changes before shutdown.
 
-## Dag 26.03.20 9:45 
+## Dag 26.03.20 9:45
 
 - [x] VBox snapshot
 - [x] Style bash PS1 <https://www.cyberciti.biz/faq/bash-shell-change-the-color-of-my-shell-prompt-under-linux-or-unix/>
@@ -128,13 +128,20 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 - [x] Enable kubectl autocompletion <https://kubernetes.io/docs/tasks/tools/install-kubectl/>
   - as root user: `kubectl completion bash >/etc/bash_completion.d/kubectl`
 - [x] Flask-vue-kubernetes <https://testdriven.io/blog/running-flask-on-kubernetes/>
+- [x] Git push changes before shutdown.
+- [x] Snapshot.
 
+## Dag 27.03.20 8:50
+
+- [x] Persistent Volume / Persisten Volume Claim
+- [x] Stateful applications blog <https://kubernetes.io/blog/2016/12/statefulset-run-scale-stateful-applications-in-kubernetes/>
+- [x] Deployment vs statefulsett vs deamonsets <https://medium.com/stakater/k8s-deployments-vs-statefulsets-vs-daemonsets-60582f0c62d4>
+- [] Standalone Mongodb on Kube <https://medium.com/@dilipkumar/standalone-mongodb-on-kubernetes-cluster-19e7b5896b27>
+- [] Running MongoDB on Kubernetes with StatefulSets <https://kubernetes.io/blog/2017/01/running-mongodb-on-kubernetes-with-statefulsets/>
+- [] <https://leadwithoutatitle.wordpress.com/2018/03/05/how-to-deploy-mongodb-with-persistent-volume-in-kubernetes/>
 
 - [] Git push changes before shutdown.
-
-## Dag 27.03.20 
-- [] Persistent Volume / Persisten Volume Claim
-- [] Running MongoDB on Kubernetes with StatefulSets <https://kubernetes.io/blog/2017/01/running-mongodb-on-kubernetes-with-statefulsets/>
+- [] vm Snapshot.
 
 ### Backlog
 
@@ -146,6 +153,10 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 - [ ] Connect Backend with Frontend  
 - [ ] Setup keycloak  
 - [ ] Prometheus monitoring Kubernetes. <https://sysdig.com/blog/kubernetes-monitoring-prometheus/>
+- [ ] Feature toggling.
+- [ ] Feature gates <https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/>
+- [ ] K9 Kubectl improved?
+- [] Kubernetes Vaults <https://testdriven.io/blog/managing-secrets-with-vault-and-consul/>
 
 ### Kubernetes Architecture
 
@@ -161,7 +172,8 @@ Provides declarative updates for Pods and ReplicateSets(replica set of pods)
 #### Ingress
 
 Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. Traffic routing is controlled by rules defined on the Ingress resource.
-```
+
+```none
     internet
         |
   [ Ingress ]
@@ -242,6 +254,10 @@ __Services__ are introduces to provide reliable networking by bringing stable IP
 
 Pods are associated with services through key-value pairs called __labels__ and __selectors__. A service automatically discovers a new pod with labels that match the selector. This also removes terminated pods from the cluster.
 
+###### Headless Service
+
+Like a normal Kubernetes Service, except it doesn't perform any load balancing.
+
 ## Podman
 
 `podman pull images`: First check registry.redhat.io for latest image, then docker.io if not there.  
@@ -289,6 +305,7 @@ Once started: `kubectl`
 `minikube config set memory x` : increase memory beyond just default 2 GB.  
 
 #### Kubectl - Kubernetes command-line tool
+
 `kubectl version`: Display the kubectl version
 Allows to run commands against Kubernetes clusters.  
 `kubectl cluster-info` : Details of the cluster and its health status  
@@ -335,7 +352,41 @@ kubectl attack curl -i  # Attatch to running container
 root@curl:/ nslookup my-ngnix
 ```
 
+### Volumes
+
+Storage. Pods access storage by using the claim as a Volume.
+
+__Emptydir__ is an empty directory either in RAM or on disk (SSH/HDD). Not persistent, as data from the _epmtyDir_ is deleted.  
+
+__hostPath__ is a volume that mounts a file or directory from the host node's filesystem into your Pod. Essentially a Non-empty __EmptyDir__.  
+
+__nfs__ is a volume that allows an existing NFS (Network File System) share to be mounted into your Pod. Nfs volues are preserved and can be used my multiple pods.  
+
+#### Provisioning
+
+__PersistentVolume__ refers to static storage.  
+__StorageClass__ refers to dynamic storage.  
+
+__Static__ is a number of __PersistentVolumes__, that carry the detail of the real storage which is available for use bh the cluster user. They exist in the Kube API and are availible for consumption. 
+
+When none of the static PVs matches a user's PersistentVolumeClaim, the cluster  may try to __dynamically__ provision a volume specially for the PVC, based on _StorageClasses_. The PVC must request a specific class the administrator have created beforehand.
+
+#### PersistentVolumeClaim
+
+__persistentVolumeClaim__ is used to mount a __PersistentVolume__ into a Pod. Will connect to _PersistentVolume_ if __StorageClassName__ is not provided, else go to __StorageClass__. A controller in PVC watches for new PVCs, when it finds match, it will _bind_ them together, _binds_ are exclusive, meaning cannot bind 2 pvc to the same pv. A __StorageClass__ provides a way for administrators to describe the "classes" of storage they offer. __Foundation__ of dynamic provisioning.  
+
+__PersistentVolume__ are a way for users to "claim" durable storage (such as a GCE PersistentDisk or an iSCSI volume) without knowing the details of the particular cloud enviroment.
+
+__PersistentVolumeRecycle__ Rescycle, Delete
+
+__Selecter__ filter out wich PV to use from the PVC.
+
 ## Postgres
+
 `\l` List tables
 `\c collection` Use collection.
 `select * from collection`: Get all data records in collection.
+
+### Cluster
+
+Set of node machines running containerized applications.
