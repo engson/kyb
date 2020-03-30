@@ -1,54 +1,59 @@
+# Headless service for stable DNS entries of StatefulSet members.
 apiVersion: v1
 kind: Service
 metadata:
- name: mongo
- labels:
-  app: mongo
+  name: mongo
+  labels:
+    service: mongo
 spec:
- ports:
+  selector:
+      service: mongo
+  type: ClusterIP
+  clusterIP: None
+  ports:
   - port: 27017
     targetPort: 27017
- clusterIP: None
- selector:
-  role: mongo
 ---
+# Client service for connecting to any MySQL instance for reads.
+# For writes, you must instead connect to the master: mysql-0.mysql.
 apiVersion: apps/v1 
 kind: StatefulSet
 metadata:
- name: mongo
+  labels:
+    name: database
+  name: mongo
 spec:
   selector:
     matchLabels:
-      app: mongo # has to match .spec.template.metadata.labels
-  serviceName: "mongo"
+      service: mongo # has to match .spec.template.metadata.labels
+  serviceName: mongo-service
   replicas: 1
   template:
     metadata:
       labels:
-        app: mongo # has to match .spec.selector.matchLabels
+        service: mongo  # has to match .spec.selector.matchLabels
         enviroment: test
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-        - name: mongo
+        - name: mongo-container
           image: mongo
           command:
             - mongod
             - "--bind_ip"
             - 0.0.0.0
-            - "--smallfiles"
-            - "--noprealloc"
+          resources:
+            requests:
+              cpu: "0.2"
+              memory: 200Mi
           ports:
             - containerPort: 27017
           volumeMounts:
             - mountPath: /data/db
-              name: mongo-pv-storage
-  volumeClaimTemplates:
-  - metadata:
-      name: mongo-pv-storage
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: "my-storage-class"
-      resources:
-        requests:
-          storage: 1Gi
+              name: mongo-volume-mount
+      dnsPolicy: ClusterFirst
+      volumes:
+      - name: mongo-volume-mount
+        persistentVolumeClaim:
+          claimName: mongo-pvc
+

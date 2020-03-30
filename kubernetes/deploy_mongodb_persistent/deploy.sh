@@ -2,8 +2,7 @@
 
 echo "Creating the volumes"
 
-kubectl apply -f ./pv_mongoyml.yaml
-kubectl apply -f ./pvc_mongo.yaml
+kubectl apply -f ./volume_mongo.yaml
 
 echo "Creating the mongo service and statefulset"
 # The StatefulSet "mongo" is invalid: spec: Forbidden:

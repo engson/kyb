@@ -1,29 +1,29 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: postgres-pv
+  name: mongo-pv
   labels:
     type: local
 spec:
   capacity:
-    storage: 2Gi
-  storageClassName: standard
+    storage: 1Gi
+  storageClassName: manual
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany 
   hostPath:
-    path: "/data/postgres-pv"
+    path: /data/db
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: postgres-pvc
+  name: mongo-pvc
   labels:
     type: local
 spec:
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteMany 
   resources:
     requests:
-      storage: 2Gi
-  volumeName: postgres-pv
-  storageClassName: standard
+      storage: 1Gi
+  volumeName: mongo-pv
+  storageClassName: manual

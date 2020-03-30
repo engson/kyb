@@ -136,12 +136,32 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 - [x] Persistent Volume / Persisten Volume Claim
 - [x] Stateful applications blog <https://kubernetes.io/blog/2016/12/statefulset-run-scale-stateful-applications-in-kubernetes/>
 - [x] Deployment vs statefulsett vs deamonsets <https://medium.com/stakater/k8s-deployments-vs-statefulsets-vs-daemonsets-60582f0c62d4>
-- [] Standalone Mongodb on Kube <https://medium.com/@dilipkumar/standalone-mongodb-on-kubernetes-cluster-19e7b5896b27>
-- [] Running MongoDB on Kubernetes with StatefulSets <https://kubernetes.io/blog/2017/01/running-mongodb-on-kubernetes-with-statefulsets/>
-- [] <https://leadwithoutatitle.wordpress.com/2018/03/05/how-to-deploy-mongodb-with-persistent-volume-in-kubernetes/>
+- [-] Standalone Mongodb on Kube <https://medium.com/@dilipkumar/standalone-mongodb-on-kubernetes-cluster-19e7b5896b27>
+- [-] Running MongoDB on Kubernetes with StatefulSets <https://kubernetes.io/blog/2017/01/running-mongodb-on-kubernetes-with-statefulsets/>
+- [-] <https://leadwithoutatitle.wordpress.com/2018/03/05/how-to-deploy-mongodb-with-persistent-volume-in-kubernetes/>
 
-- [] Git push changes before shutdown.
-- [] vm Snapshot.
+- [x] Git push changes before shutdown.
+
+## Dag 30.03.20 9:10 - 16:50
+
+- [x] minikube mongodb demo <https://github.com/pkdone/minikube-mongodb-demo>
+  - `db.getSiblingDB('admin').auth("main_admin", "abc123");`
+  - `db.setSlaveOk();` Set Secondary as Slaves to Primary.
+- [x] Fortsette med deployment av Mongodb.
+- [x] Sette opp Mongo container. 
+- [-] <https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/#pods-in-a-statefulset>
+  - `Pods in a StatefulSet have a unique ordinal index and a stable network identity.`
+  -`<StatefulSet>-<Ordinal>.<Service>`
+- [-] <https://kubernetes.io/blog/2017/01/running-mongodb-on-kubernetes-with-statefulsets/>
+  - `mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo:27017/dbname\_?`
+- [] Zookeper?
+
+## Dag 31.03.20
+
+- [] <https://kubernetes.io/docs/tasks/run-application/run-replicated-stateful-application/>
+- [] <https://kubernetes.io/blog/2017/01/running-mongodb-on-kubernetes-with-statefulsets/>
+- [] <https://docs.mongodb.com/manual/replication/>
+
 
 ### Backlog
 
@@ -151,7 +171,7 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 - [ ] Setup Flask Frontend  
 - [ ] Setup Redis with mongodb  
 - [ ] Connect Backend with Frontend  
-- [ ] Setup keycloak  
+- [ ] Setup keycloak.
 - [ ] Prometheus monitoring Kubernetes. <https://sysdig.com/blog/kubernetes-monitoring-prometheus/>
 - [ ] Feature toggling.
 - [ ] Feature gates <https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/>
