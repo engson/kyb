@@ -22,7 +22,7 @@ Home office
       - [x] Extend partiton table with 16.23 GiB more
         - `lvextend -L +16.23GiB /dev/mapper/cl-root`
         - `partprobe`
-        - `xfs_growfs /`
+        - `xfs_growfs /`mm
 - [x] Setup conda enviroment "kubec"  
 `conta create -n kubec python=3.6 pip`  
 `source activate kubec`  
@@ -167,10 +167,16 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 - [] How to send traffic to Mongodb, and queries...
 
 ## Dag 01.04.20 8:50
-- Standup: Fortsette med det jeg drev med i går. Node drain. Hente kode fra Håvard, og bytte ut databasen. 
-- [] Fatal: Git index smaller than expected: <https://stackoverflow.com/questions/4254389/git-corrupt-loose-object/13918515#13918515?newreg=7082361fbc474a77b63e977aa8a80ff0>
-- [] mondb-replication <https://maruftuhin.com/blog/mongodb-replica-set-on-kubernetes/>
-- 
+
+- Standup: Fortsette med det jeg drev med i går. Node drain. Hente kode fra Håvard, og bytte ut databasen.
+- [x] Fatal: Git index smaller than expected: <https://stackoverflow.com/questions/4254389/git-corrupt-loose-object/13918515#13918515?newreg=7082361fbc474a77b63e977aa8a80ff0>
+- [x] mondb-replication <https://maruftuhin.com/blog/mongodb-replica-set-on-kubernetes/>
+- [x] <https://medium.com/faun/scaling-mongodb-on-kubernetes-32e446c16b82>
+- [x] dnslookup pod <https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/>
+
+## Dag 02.04.20
+
+- [] Koble opp db med repo <https://github.ibm.com/gbs-norway-tech-community/vue-flask-mongo-kubernetes>
 
 ### Backlog
 
@@ -185,7 +191,8 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 - [ ] Feature toggling.
 - [ ] Feature gates <https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/>
 - [ ] K9 Kubectl improved?
-- [] Kubernetes Vaults <https://testdriven.io/blog/managing-secrets-with-vault-and-consul/>
+- [ ] Kubernetes Vaults <https://testdriven.io/blog/managing-secrets-with-vault-and-consul/>
+- [ ] grafana <https://medium.com/faun/kubernetes-multi-cluster-monitoring-using-prometheus-and-thanos-7549a9b0d0ae>
 
 ### Kubernetes Architecture
 

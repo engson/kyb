@@ -1,0 +1,17 @@
+### JAVASCRIPT ###
+node_modules
+dist
+
+### PYTHON ###
+__pycache__
+*.pyc
+
+### EDITOR ###
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+

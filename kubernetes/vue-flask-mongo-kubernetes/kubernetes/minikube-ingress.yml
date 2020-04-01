@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: app-boilerplate-ingress
+  annotations:
+spec:
+  rules:
+  - host: app-boilerplate
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: vue-frontend
+          servicePort: 8080
+      - path: /api
+        backend:
+          serviceName: flask-api
+          servicePort: 5000
