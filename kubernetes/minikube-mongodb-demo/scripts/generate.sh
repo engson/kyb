@@ -9,6 +9,7 @@ TMPFILE=$(mktemp)
 kubectl create secret generic shared-bootstrap-data --from-file=internal-auth-mongodb-keyfile=$TMPFILE
 rm $TMPFILE
 
+
 # Create mongodb service with mongod stateful-set
 # TODO: Temporarily added no-valudate due to k8s 1.8 bug: https://github.com/kubernetes/kubernetes/issues/53309
 kubectl apply -f ../resources/mongodb-service.yaml --validate=false

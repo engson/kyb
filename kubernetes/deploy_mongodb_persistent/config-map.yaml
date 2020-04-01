@@ -1,0 +1,15 @@
+# To make it easier to keep track of configurations on each POD.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo
+  labels:
+    config: mongo
+data:
+  master.cnf: |
+    [mysqld]
+    log-bin
+
+  slave.cnf: |
+    [mysqld]
+    super-read-only

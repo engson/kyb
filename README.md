@@ -166,8 +166,9 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
   - `kubectl uncordon m01`
 - [] How to send traffic to Mongodb, and queries...
 
-## Dag 01.04.20
-
+## Dag 01.04.20 8:50
+- Standup: Fortsette med det jeg drev med i går. Node drain. Hente kode fra Håvard, og bytte ut databasen. 
+- [] Fatal: Git index smaller than expected: <https://stackoverflow.com/questions/4254389/git-corrupt-loose-object/13918515#13918515?newreg=7082361fbc474a77b63e977aa8a80ff0>
 - [] mondb-replication <https://maruftuhin.com/blog/mongodb-replica-set-on-kubernetes/>
 - 
 

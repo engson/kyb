@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: DeamonSet
+metadata:
+  name: hostvm-configurer
+  labels:
+    app: startup-script
+spec:
+  template:
+    metadata:
+      labels:
+        app: startup-script
+    spec:
+      hostPID: true
+    containers:
+    - name: 

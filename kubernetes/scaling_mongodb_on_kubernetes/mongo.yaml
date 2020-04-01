@@ -1,0 +1,129 @@
+# Kubernetes supports multiple virtual clusters backed by the same physical cluster. These virtual clusters are called namespaces. 
+#apiVersion: v1
+#kind: Namespace
+#metadata:
+#  name: mongo
+#---
+# For the mongo service account in the "mongo" namspace.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: mongo
+  #namespace: mongo
+---
+# Role-based access control (RBAC) is a method of regulating access to computer or network resources based on the roles of individual users within your organization.
+# 4 roles : Role, ClusterRole, RoleBinding and ClusterRoleBinding
+# To grant permissions across a whole cluster, you can use a ClusterRoleBinding.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: mongo
+subjects: # Anyone in the mongo ServiceAccount in namespace mongo
+  - kind: ServiceAccount
+    name: mongo
+    namespace: default
+roleRef: # rules that represent a set of permissions. Purely additive.
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: fast
+provisioner: k8s.io/minikube-hostpath
+parameters:
+  type: pd-ssd
+  fsType: xfs
+#allowVolumeExpansion: true
+volumeBindingMode: Immediate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo
+ #namespace: mongo
+  labels:
+    name: mongo
+spec:
+ ports:
+ - port: 27017
+   targetPort: 27017
+ clusterIP: None
+ selector:
+   role: mongo
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo
+  #namespace: mongo
+  labels:
+    role: mongo
+spec:
+  selector:
+    matchLabels:
+      role: mongo # has to match .spec.template.metadata.labels
+  serviceName: mongo
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        role: mongo
+        environment: staging
+        replicaset: MainRepSet
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: replicaset
+                  operator: In
+                  values:
+                  - MainRepSet
+              topologyKey: kubernetes.io/hostname
+      terminationGracePeriodSeconds: 10
+      serviceAccountName: mongo
+      containers:
+        - name: mongo
+          image: mongo
+          command:
+            - mongod
+            - "--wiredTigerCacheSizeGB"
+            - "0.25"
+            - "--bind_ip"
+            - "0.0.0.0"
+            - "--replSet"
+            - MainRepSet
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongo-persistent-storage
+              mountPath: /data/db
+          resources:
+            requests:
+              cpu: "0.1" # request 100 millicore
+              memory: 200Mi
+        - name: mongo-sidecar
+          image: cvallance/mongo-k8s-sidecar
+          env:
+            - name: MONGO_SIDECAR_POD_LABELS
+              value: "role=mongo,environment=staging"
+            - name: KUBE_NAMESPACE
+              value: "default"
+            - name: KUBERNETES_MONGO_SERVICE_NAME
+              value: "mongo"
+  volumeClaimTemplates:
+  - metadata:
+      name: mongo-persistent-storage
+      annotations:
+        volume.kubernetes.io/storage-class: "fast"
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: fast
+      resources:
+        requests:
+          storage: 1Gi

@@ -67,6 +67,15 @@ spec:
             - name: secrets-volume
               readOnly: true
               mountPath: /etc/secrets-volume
+        - name: mongo-sidecar
+          image: cvallance/mongo-k8s-sidecar
+          env:
+            - name: MONGO_SIDECAR_POD_LABELS
+              value: "role=mongo,environment=staging"
+            - name: KUBE_NAMESPACE
+              value: "mongo"
+            - name: KUBERNETES_MONGO_SERVICE_NAME
+              value: "mongo"
   volumeClaimTemplates:
     - metadata:
         name: mongodb-pvc
