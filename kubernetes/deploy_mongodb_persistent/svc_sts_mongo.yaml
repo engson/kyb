@@ -1,13 +1,21 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: shared-bootstrap-data 
+type: Opaque
+data: 
+  internal-auth-mongodb-keyfile: 3E0kRBhDxLeqtcrAIkIzEPyXxzcdMZQd0k8UOKeA3J4dQ8gkwaDGjpc8E8puDX5yx1WuLrD8aDuVmcpBaTvaBPW6CeCQ91rNqfwEwbY9kaFeyNPj56UAmhUkJ2CqLN15WdyGayOOq8LXK3nNnrbCJfwH/n1OToBIKQE6H9SjY9D+0hFjVgcfcvhNxxLEMfsI1//lKb0qnVjL+GiEl7VeO2wmpKPVXHBk2vE3vhbR5xhtCy+91JjKWIvc2lMdUC5ux/uwaHvQxCkGPZ1kWlhzJImLpgEXLCOUUNHJUp6neJuiI0OOKHgVnx6QgpWczZHV/nF+B+CVAWyJgGqYbl1eaveHWeAgkqgVE5oMsXUbjA4GeECOKswOL6J//mDN6dc8HjjYJinZ2fxErIv/TGfIMM3r0rdzAuxnmrOYJtvurHA2sKZcyY+8OfrnCD2EySUYj1e3rwV3mpUBAsSyw8HbkYVW3XRY+FZEUEea3pIhYhActTNmml0/4f4uv3qYOgnuE8V/GuCHBY8J3fKIxeo3xgliQDdXAhaf+R3+vw/cA5X2XzzhtEP+NFY6L1bOYEieIEtz7JCjw+njgqjMZx+UcukJtZmInufJa9VloQgJHu+/zxPb0MMOcz7YksyDS5XgmKmbNG/33sCPFtWPmbqQ8koyhAezYZoMarv4qJ9WOTAFHLdw0nY5XS5pwBsgFFE8dac/JVSVbIh73cKU08luCvZ3wBGl3C4JSAtucLrpeNvpbJztngOBSqkr+P0TDV5I5rLYrhuD/SJKUuggtPxj4ZNieSRCGmxUa8EJnxn4hCEoobDRjEiua8q/vdebkBZWZQzLvz56AohlMA2S6cfDLGaLF98TN9IOKVkCN100orwhELcIoEt0Ajk8LXiFOIORrV6U75MyQyw4zxEjK4fn2mrrjKSaSSKDBas/DtKVxj28gBq6yXJcSeUjZlPPRKEfkwHsveyL0IDoHQAA0bl4HmC2NaKJ
+---
 # Headless service for stable DNS entries of StatefulSet members.
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongo
+  name: mongo-service
   labels:
-    service: mongo
+    service: mongo-service
 spec:
   selector:
-      service: mongo
+      service: mongo-service
   type: ClusterIP
   clusterIP: None
   ports:
@@ -19,29 +27,34 @@ spec:
 apiVersion: apps/v1 
 kind: StatefulSet
 metadata:
-  labels:
-    name: database
-  name: mongo
+  name: mongo-stateful
 spec:
   selector:
     matchLabels:
-      service: mongo # has to match .spec.template.metadata.labels
+      service: mongo-service # has to match .spec.template.metadata.labels
   serviceName: mongo-service
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
-        service: mongo  # has to match .spec.selector.matchLabels
-        enviroment: test
+        service: mongo-service  # has to match .spec.selector.matchLabels
     spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: mongo-container
           image: mongo
           command:
+            - "numactl"
+            - "--interleave=all"
             - mongod
             - "--bind_ip"
             - 0.0.0.0
+            - "--replSet"
+            - "MainRepSet"
+            - "--clusterAuthMode"
+            - "keyFile"
+            - "--keyFile"
+            - "/etc/secrets-volume/internal-auth-mongodb-keyfile"
           resources:
             requests:
               cpu: "0.2"
@@ -49,11 +62,16 @@ spec:
           ports:
             - containerPort: 27017
           volumeMounts:
-            - mountPath: /data/db
-              name: mongo-volume-mount
-      dnsPolicy: ClusterFirst
-      volumes:
-      - name: mongo-volume-mount
-        persistentVolumeClaim:
-          claimName: mongo-pvc
-
+            - name: mongodb-pvc
+              mountPath: /data/db
+            - name: secrets-volume
+              readOnly: true
+              mountPath: /etc/secrets-volume
+  volumeClaimTemplates:
+    - metadata:
+        name: mongodb-pvc
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi

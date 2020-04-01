@@ -82,3 +82,13 @@ spec:
       - name: mongodb-data
         persistentVolumeClaim:
           claimName: mongodb-standalone
+  volumeClaimTemplates:
+    - metadata:
+        name: mongodb-persistent-storage-claim
+        annotations:
+          volume.beta.kubernetes.io/storage-class: "standard"
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi

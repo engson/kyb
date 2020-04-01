@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: box-service
+  labels:
+    service: box-service
+spec:
+  selector:
+      service: box-service
+  type: ClusterIP
+  clusterIP: None
+  ports:
+  - port: 1200
+    targetPort: 1200
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: my-app
+  labels:
+    app: my-app
+spec:
+  serviceName: box-service
+  selector:
+    matchLabels:
+      app: my-app # has to match pods template label
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app
+        image: busybox
+        volumeMounts:
+          - name: pv-data
+            mountPath: /data
+  volumeClaimTemplates:
+    - metadata:
+        name: pv-data
+      spec:
+        accessModes: 
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 50Mi

@@ -20,6 +20,8 @@ spec:
   selector:
     matchLabels:
       role: mongo
+      environment: test
+      replicaset: MainRepSet
   serviceName: mongodb-service
   replicas: 3
   template:
@@ -83,11 +85,8 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: mongodb-persistent-storage-claim
-      annotations:
-        volume.beta.kubernetes.io/storage-class: "standard"
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:
         requests:
           storage: 1Gi
-

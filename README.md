@@ -148,7 +148,7 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
   - `db.getSiblingDB('admin').auth("main_admin", "abc123");`
   - `db.setSlaveOk();` Set Secondary as Slaves to Primary.
 - [x] Fortsette med deployment av Mongodb.
-- [x] Sette opp Mongo container. 
+- [x] Sette opp Mongo container.
 - [-] <https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/#pods-in-a-statefulset>
   - `Pods in a StatefulSet have a unique ordinal index and a stable network identity.`
   -`<StatefulSet>-<Ordinal>.<Service>`
@@ -156,12 +156,20 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
   - `mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo:27017/dbname\_?`
 - [] Zookeper?
 
-## Dag 31.03.20
+## Dag 31.03.20 9:00
 
-- [] <https://kubernetes.io/docs/tasks/run-application/run-replicated-stateful-application/>
-- [] <https://kubernetes.io/blog/2017/01/running-mongodb-on-kubernetes-with-statefulsets/>
-- [] <https://docs.mongodb.com/manual/replication/>
+- Standup : Scalering av mongodb, hvordan sende queries fra andre poder. Lese litt på Helm.
+- [x] <https://kubernetes.io/docs/tasks/run-application/run-replicated-stateful-application/>
+- [x] <https://kubernetes.io/blog/2017/01/running-mongodb-on-kubernetes-with-statefulsets/>
+- [x] <https://docs.mongodb.com/manual/replication/>
+  - `kubectl drain m01 --force --delete-local-data --ignore-daemonsets`
+  - `kubectl uncordon m01`
+- [] How to send traffic to Mongodb, and queries...
 
+## Dag 01.04.20
+
+- [] mondb-replication <https://maruftuhin.com/blog/mongodb-replica-set-on-kubernetes/>
+- 
 
 ### Backlog
 
