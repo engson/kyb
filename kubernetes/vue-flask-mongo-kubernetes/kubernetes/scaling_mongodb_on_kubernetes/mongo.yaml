@@ -4,13 +4,13 @@
 #metadata:
 #  name: mongo
 #---
-# For the mongo service account in the "mongo" namspace.
+# For the mongo service account in the "mongo" namespace.
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: mongo
   #namespace: mongo
----
+--- 
 # Role-based access control (RBAC) is a method of regulating access to computer or network resources based on the roles of individual users within your organization.
 # 4 roles : Role, ClusterRole, RoleBinding and ClusterRoleBinding
 # To grant permissions across a whole cluster, you can use a ClusterRoleBinding.
@@ -37,8 +37,7 @@ provisioner: k8s.io/minikube-hostpath
 parameters:
   type: pd-ssd
   fsType: xfs
-#allowVolumeExpansion: true
-volumeBindingMode: Immediate
+volumeBindingMode: Immediate # Bind PVC to PV Immediately
 ---
 apiVersion: v1
 kind: Service

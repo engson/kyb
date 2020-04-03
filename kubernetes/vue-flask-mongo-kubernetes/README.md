@@ -70,4 +70,3 @@ NB:
     Proper exception handling
     Authentication and Authorization
     DB scalability
-

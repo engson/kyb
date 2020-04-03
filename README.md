@@ -176,7 +176,40 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 
 ## Dag 02.04.20
 
-- [] Koble opp db med repo <https://github.ibm.com/gbs-norway-tech-community/vue-flask-mongo-kubernetes>
+- [x] Koble opp db med repo <https://github.ibm.com/gbs-norway-tech-community/vue-flask-mongo-kubernetes>
+  - Building repos
+  - `podman build -t flask-backend .`
+  - `su root` too many files in vue-frontend for default users.
+  - `podman build -t vue-frontend .`
+    - [x] create repo
+      `https://hub.docker.com/repository/docker/sondreweb/vue-frontent`
+    - [x] push image to repo
+      - [x] `podman login --username sondreweb docker.io`, paste key from docker.io as password.
+      - `podman push localhost/vue-frontend sondreweb/vue-frontend:latest`
+  - `minikube podman-env`
+  - `eval $(minikube -p minikube podman-env)` Use podman for images
+  
+- [x] Helm <https://www.youtube.com/watch?v=fy8SHvNZGeE>
+- [x] Install helm <https://www.digitalocean.com/community/tutorials/how-to-install-software-on-kubernetes-clusters-with-the-helm-package-manager>
+- [] Blocker! <https://github.com/kubernetes/minikube/issues/6350>
+- [] K9
+
+## Day 03.04.20 Pause: 12-13
+
+Fortsette med det fra i går. Se litt mer på helm. Loadbalancing.
+- [x] Koble opp db med repo <https://github.ibm.com/gbs-norway-tech-community/vue-flask-mongo-kubernetes>
+  - Sette begge docker images til public på docker hub.
+  - Enviroment varlaibles `/# printenv` in shell of container.
+  - Reaching primary mongodb <https://github.com/helm/charts/issues/1569>
+  - `db.getSiblingDB("mongo"); use mongo; db.post.find()` i master
+  - `db.getSiblingDB("mongo"); use mongo; db.setSlaveOk();db.post.find()`
+  
+- [-] Setup statefull database and write using master node and read using slaves.
+- [-] Helm init
+
+## Day 06.04.20
+
+- [-] Helm init
 
 ### Backlog
 
@@ -193,6 +226,18 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 - [ ] K9 Kubectl improved?
 - [ ] Kubernetes Vaults <https://testdriven.io/blog/managing-secrets-with-vault-and-consul/>
 - [ ] grafana <https://medium.com/faun/kubernetes-multi-cluster-monitoring-using-prometheus-and-thanos-7549a9b0d0ae>
+- [] Sikkere mongodb replicaset <http://pauldone.blogspot.com/2017/06/deploying-mongodb-on-kubernetes-gke25.html>
+
+## Helm
+
+### Tiller
+
+Service component of helm. Takes command sent to cli client and turn them into something the kubernetes kluster will understand.
+
+`heml install myapp` Deploy application to kubernetes with helm config
+`heml upgrade mypp` Update application on kubernetes with upgrade helm config.
+`helm rollback version...` Rollback to previous configuration history.
+`helm package` to semd helm chart to repo, to make reusability easier.
 
 ### Kubernetes Architecture
 
@@ -372,6 +417,9 @@ Allows to run commands against Kubernetes clusters.
 Get name of a pod (if only one)
 `kubectl get pod -l service=postgres -o jsonpath="{.items[0].metadata.name}"`
 
+CHeck if volume are still attached.
+`Kubectl get volumeattachment`
+
 ##### Deployment
 
 `kubectl scale deployment <deploymnt> --replicas=x`: Adjusy replica count on deployment.
@@ -403,7 +451,7 @@ __nfs__ is a volume that allows an existing NFS (Network File System) share to b
 __PersistentVolume__ refers to static storage.  
 __StorageClass__ refers to dynamic storage.  
 
-__Static__ is a number of __PersistentVolumes__, that carry the detail of the real storage which is available for use bh the cluster user. They exist in the Kube API and are availible for consumption. 
+__Static__ is a number of __PersistentVolumes__, that carry the detail of the real storage which is available for use bh the cluster user. They exist in the Kube API and are availible for consumption.
 
 When none of the static PVs matches a user's PersistentVolumeClaim, the cluster  may try to __dynamically__ provision a volume specially for the PVC, based on _StorageClasses_. The PVC must request a specific class the administrator have created beforehand.
 

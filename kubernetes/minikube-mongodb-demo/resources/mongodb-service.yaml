@@ -85,6 +85,8 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: mongodb-persistent-storage-claim
+      labels:
+        name: pv-mongo
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:

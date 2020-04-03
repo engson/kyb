@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vue-frontend
+  labels:
+    service: vue-frontend
+spec:
+  selector:
+    app: vue-frontend
+  ports:
+  - port: 8080
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vue-frontend
+  labels:
+    name: vue-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vue-frontend
+  template:
+    metadata:
+      labels:
+        app: vue-frontend
+    spec:
+      containers:
+      - name: vue-frontend
+        image: sondreweb/vue-frontent:latest
+        imagePullPolicy: IfNotPresent # doest exist in clound
+      #imagePullSecrets: Wrong dockerconfigjson file format, need correct template.
+      #- name: regcred
+      restartPolicy: Always

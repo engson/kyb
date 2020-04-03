@@ -34,13 +34,13 @@ def configure_app(app):
 
     app.config['MONGO_HOST'] = os.environ.get('MONGO_HOST', 'localhost')
     app.config['MONGO_PORT'] = os.environ.get('MONGO_PORT', '27017')
-    app.config['MONGO_DB'] = os.environ.get('MONGO_DB', 'flask_api')
 
-    app.config['MONGO_URI'] = "mongodb://{}:{}/{}".format(
-        app.config['MONGO_HOST'],
-        app.config['MONGO_PORT'],
-        app.config['MONGO_DB']
-    )
+    app.config['MONGO_DB'] = os.environ.get('MONGO_DB', 'flask_api')
+    app.config['MONGO_SDB'] = os.environ.get('MONGO_SDB')
+
+    app.config['MONGO_REPLICASET'] = os.environ.get('MONGO_REPLICASET', 'MainRepSet')
+
+    app.config['MONGO_URI'] = f"mongodb://{app.config['MONGO_HOST']}:{app.config['MONGO_PORT']}/{app.config['MONGO_DB']}?replicaset={app.config['MONGO_REPLICASET']}"
 
 def configure_logging(app):
     """ Configure logging.

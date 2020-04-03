@@ -1,3 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-api
+  labels:
+    service: flask-api
+spec:
+  selector:
+    app: flask-api
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,17 +32,17 @@ spec:
         app: flask-api
     spec:
       containers:
-      - env:
+      - env: # Changed to statefulset
         - name: FLASK_ENV
           value: development
         - name: MONGO_HOST
-          value: mongodb
+          value: mongo
         - name: MONGO_PORT
           value: "27017"
         - name: MONGO_DB
-          value: flask_api
-        image: flask-api:latest
-        imagePullPolicy: IfNotPresent
+          value: mongo
+        image: sondreweb/flask-backend:test.v1
+        imagePullPolicy: Always
         ports:
           - containerPort: 5000
         name: flask-api

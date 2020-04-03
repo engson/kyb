@@ -1,18 +1,18 @@
 from flask import jsonify, request, make_response
 from flask_restful import Resource
 from pymongo.collection import ReturnDocument
-
 from database.mongo import mongo
 
 class Posts(Resource):
     def get(self):
+        # readPreference='secondaryPreferred' with GET, must get an slave client istead for this.
         posts_db = mongo.db.posts
         posts = list(posts_db.find())
         return make_response(jsonify(posts), 200)
 
     def post(self):
         post = request.get_json()
-        posts_db = mongo.db.posts
+        posts_db = mongo.db.posts # get collection.
         post_id = posts_db.insert(post)
         new_post = posts_db.find_one({'_id': post_id })
         return make_response(new_post, 200)
