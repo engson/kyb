@@ -1,3 +1,5 @@
+## Main tutorial on mongodb site. Extended with aggegation of queries.
+
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 import pymongo

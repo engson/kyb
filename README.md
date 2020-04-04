@@ -1,8 +1,10 @@
 # Home office tasks
 
 Home office
+[x] - Done
+[-] - not done or could not be completed, blocker etc.
 
-## Dag 19.3.20 8:30 - 16:30
+## Dag 19.3.20
 
 - [x] Setup work enviroment
   - [x] Install VurtualBox guest additions
@@ -38,7 +40,7 @@ Home office
   - [x] Yaml extension
 - [x] Follow Tutorial to learn basics of Kubernetes
 
-## Dag 20.3.20 kl 9:30
+## Dag 20.3.20
 
 - [x] Kubernetes architecture overview: <https://www.youtube.com/watch?v=8C_SCDbUJTg>
 - [x] Follow Basic Tutorial: <https://api.mongodb.com/python/current/tutorial.html>
@@ -59,15 +61,15 @@ EOL
 - [x] Aggregate in Mongodb: <https://medium.com/@paulrohan/aggregation-in-mongodb-8195c8624337>
 - [x] Aggregation Mongod: <https://docs.mongodb.com/manual/aggregation/>
 
-## Dag 23.3.20 kl 9:00 - 17:45
+## Dag 23.3.20
 
 - [x] Aggregate in Mongodb: <https://medium.com/@paulrohan/aggregation-in-mongodb-8195c8624337>
 - [x] Mongo Aggregations in 5 Minutes: <https://engineering.universe.com/mongo-aggregations-in-5-minutes-b8e1d9c274bb>
 - [x] Chanter 4: Quering: <https://www.oreilly.com/library/view/mongodb-the-definitive/9781449344795/ch04.html>
 
-## Dag 24.3.20 kl 9:15 - 17:15
+## Dag 24.3.20
 
-- [?] Installing Podman-docker <https://thenewstack.io/check-out-podman-red-hats-daemon-less-docker-alternative/>
+- [x] (Corrupted virtual machine image first time, try to advoid?)Installing Podman-docker <https://thenewstack.io/check-out-podman-red-hats-daemon-less-docker-alternative/>
     `sudo dnf install @container-tools`
 - [x] Install podman <https://podman.io/getting-started/installation>
 - [x] Basic Setup and Use of podman <https://podman.io/getting-started/>
@@ -86,7 +88,7 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 - [-] Snapshot of current build
 - [x] Git push changes before shutdown.
 
-## Dag 25.03.20 kl 9:30
+## Dag 25.03.20
 
 - [x] Connecting Applications with Services <https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/>
 
@@ -116,7 +118,7 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
   - Podman use Dockerfiles to build images, or can use buildah syntax when Dockerfile is too restrictive (i.e. script-like approach).
 - [x] Git push changes before shutdown.
 
-## Dag 26.03.20 9:45
+## Dag 26.03.20
 
 - [x] VBox snapshot
 - [x] Style bash PS1 <https://www.cyberciti.biz/faq/bash-shell-change-the-color-of-my-shell-prompt-under-linux-or-unix/>
@@ -131,7 +133,7 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 - [x] Git push changes before shutdown.
 - [x] Snapshot.
 
-## Dag 27.03.20 8:50
+## Dag 27.03.20
 
 - [x] Persistent Volume / Persisten Volume Claim
 - [x] Stateful applications blog <https://kubernetes.io/blog/2016/12/statefulset-run-scale-stateful-applications-in-kubernetes/>
@@ -142,7 +144,7 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 
 - [x] Git push changes before shutdown.
 
-## Dag 30.03.20 9:10 - 16:50
+## Dag 30.03.20
 
 - [x] minikube mongodb demo <https://github.com/pkdone/minikube-mongodb-demo>
   - `db.getSiblingDB('admin').auth("main_admin", "abc123");`
@@ -154,9 +156,8 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
   -`<StatefulSet>-<Ordinal>.<Service>`
 - [-] <https://kubernetes.io/blog/2017/01/running-mongodb-on-kubernetes-with-statefulsets/>
   - `mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo:27017/dbname\_?`
-- [] Zookeper?
 
-## Dag 31.03.20 9:00
+## Dag 31.03.20
 
 - Standup : Scalering av mongodb, hvordan sende queries fra andre poder. Lese litt på Helm.
 - [x] <https://kubernetes.io/docs/tasks/run-application/run-replicated-stateful-application/>
@@ -164,9 +165,9 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 - [x] <https://docs.mongodb.com/manual/replication/>
   - `kubectl drain m01 --force --delete-local-data --ignore-daemonsets`
   - `kubectl uncordon m01`
-- [] How to send traffic to Mongodb, and queries...
+- [-] How to send traffic to Mongodb, and queries...
 
-## Dag 01.04.20 8:50
+## Dag 01.04.20
 
 - Standup: Fortsette med det jeg drev med i går. Node drain. Hente kode fra Håvard, og bytte ut databasen.
 - [x] Fatal: Git index smaller than expected: <https://stackoverflow.com/questions/4254389/git-corrupt-loose-object/13918515#13918515?newreg=7082361fbc474a77b63e977aa8a80ff0>
@@ -191,12 +192,21 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
   
 - [x] Helm <https://www.youtube.com/watch?v=fy8SHvNZGeE>
 - [x] Install helm <https://www.digitalocean.com/community/tutorials/how-to-install-software-on-kubernetes-clusters-with-the-helm-package-manager>
-- [] Blocker! <https://github.com/kubernetes/minikube/issues/6350>
-- [] K9
+- [-] Blocker! <https://github.com/kubernetes/minikube/issues/6350>
+  - [-] Mitigate by uploading images to docker.io instead and point to public repo imags.
+    - As root user (podman cannot build all images unless root, file size/security issues):
 
-## Day 03.04.20 Pause: 12-13
+```s
+  podman login --username <username> docker.io # key from docker.io as password.
+  podman build -t <image-tag?> <location>
+  podman push localhost/<image-tag> <username>/<image-repo>[:]<optional-version-tag>
+  # set image tag in yaml to repo image to use.
+  image: <username>/<image-repo>[:]<optional-version-tag>
+  # Rebuild kubernetes kind
+```
 
-Fortsette med det fra i går. Se litt mer på helm. Loadbalancing.
+## Day 03.04.20
+
 - [x] Koble opp db med repo <https://github.ibm.com/gbs-norway-tech-community/vue-flask-mongo-kubernetes>
   - Sette begge docker images til public på docker hub.
   - Enviroment varlaibles `/# printenv` in shell of container.
@@ -205,11 +215,14 @@ Fortsette med det fra i går. Se litt mer på helm. Loadbalancing.
   - `db.getSiblingDB("mongo"); use mongo; db.setSlaveOk();db.post.find()`
   
 - [-] Setup statefull database and write using master node and read using slaves.
+  - [] Fix loadbalander not selecting only master on write operations.
 - [-] Helm init
+  - [x] Install Helm and Tiller <https://www.digitalocean.com/community/tutorials/how-to-install-software-on-kubernetes-clusters-with-the-helm-2-package-manager>
 
 ## Day 06.04.20
 
-- [-] Helm init
+- [] Helm
+- [] Helm charts
 
 ### Backlog
 
@@ -226,7 +239,8 @@ Fortsette med det fra i går. Se litt mer på helm. Loadbalancing.
 - [ ] K9 Kubectl improved?
 - [ ] Kubernetes Vaults <https://testdriven.io/blog/managing-secrets-with-vault-and-consul/>
 - [ ] grafana <https://medium.com/faun/kubernetes-multi-cluster-monitoring-using-prometheus-and-thanos-7549a9b0d0ae>
-- [] Sikkere mongodb replicaset <http://pauldone.blogspot.com/2017/06/deploying-mongodb-on-kubernetes-gke25.html>
+- [ ] Sikkere mongodb replicaset <http://pauldone.blogspot.com/2017/06/deploying-mongodb-on-kubernetes-gke25.html>
+- [ ] Zookeper?
 
 ## Helm
 
