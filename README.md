@@ -228,10 +228,8 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 
 - [ ] Setup feature flags on kubernetes  
 - [ ] Setup feature flags on flask  
-- [ ] Setup Flask Backend  
-- [ ] Setup Flask Frontend  
+- [ ] Setup Flask Frontend (Flask megatutorial)
 - [ ] Setup Redis with mongodb  
-- [ ] Connect Backend with Frontend  
 - [ ] Setup keycloak.
 - [ ] Prometheus monitoring Kubernetes. <https://sysdig.com/blog/kubernetes-monitoring-prometheus/>
 - [ ] Feature toggling.
@@ -243,6 +241,13 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 - [ ] Zookeper?
 
 ## Helm
+
+Yum repo for Kubernetes projects handler. Optimize reusability of kubernetes projects.
+
+### Helm charts
+
+Keep track of a set of kubernetes resources (pods, deployments, services etc) in the project, and their respective 
+parameters settings for easy of resuse. 
 
 ### Tiller
 
