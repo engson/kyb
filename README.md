@@ -38,11 +38,11 @@ Home office
 - [x] Install Vscode
   - [x] Python extension
   - [x] Yaml extension
-- [x] Follow Tutorial to learn basics of Kubernetes
 
 ## Dag 20.3.20
 
 - [x] Kubernetes architecture overview: <https://www.youtube.com/watch?v=8C_SCDbUJTg>
+- [x] Follow Tutorial to learn basics of Kubernetes
 - [x] Follow Basic Tutorial: <https://api.mongodb.com/python/current/tutorial.html>
 - [x] Setup Mongodb client
   - [x] Install mongodb: <https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/>
