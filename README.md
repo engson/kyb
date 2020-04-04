@@ -38,6 +38,8 @@ Home office
 - [x] Install Vscode
   - [x] Python extension
   - [x] Yaml extension
+- [x] Plan workdays ahead. 
+- [x] Look at flask basic tutorials. 
 
 ## Dag 20.3.20
 
