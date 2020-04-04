@@ -1,6 +1,6 @@
 # Home office tasks
 
-Home office
+Home office  
 [x] - Done  
 [-] - not done or could not be completed, blocker etc.
 
