@@ -213,9 +213,11 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
   - Reaching primary mongodb <https://github.com/helm/charts/issues/1569>
   - `db.getSiblingDB("mongo"); use mongo; db.post.find()` i master
   - `db.getSiblingDB("mongo"); use mongo; db.setSlaveOk();db.post.find()`
+  - [x] Added replicaSet as parameter to when init_mongodb.
   
 - [-] Setup statefull database and write using master node and read using slaves.
-  - [] Fix loadbalander not selecting only master on write operations.
+  - [-] Fix loadbalander not selecting only master on write operations.
+  - [-] Potential fix, need a load-balancer that handles each mongo query, instead of calling Client directly from flask application endpoints.
 - [-] Helm init
   - [x] Install Helm and Tiller <https://www.digitalocean.com/community/tutorials/how-to-install-software-on-kubernetes-clusters-with-the-helm-2-package-manager>
 
