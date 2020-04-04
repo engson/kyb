@@ -159,7 +159,6 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 
 ## Dag 31.03.20
 
-- Standup : Scalering av mongodb, hvordan sende queries fra andre poder. Lese litt på Helm.
 - [x] <https://kubernetes.io/docs/tasks/run-application/run-replicated-stateful-application/>
 - [x] <https://kubernetes.io/blog/2017/01/running-mongodb-on-kubernetes-with-statefulsets/>
 - [x] <https://docs.mongodb.com/manual/replication/>
@@ -169,7 +168,6 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 
 ## Dag 01.04.20
 
-- Standup: Fortsette med det jeg drev med i går. Node drain. Hente kode fra Håvard, og bytte ut databasen.
 - [x] Fatal: Git index smaller than expected: <https://stackoverflow.com/questions/4254389/git-corrupt-loose-object/13918515#13918515?newreg=7082361fbc474a77b63e977aa8a80ff0>
 - [x] mondb-replication <https://maruftuhin.com/blog/mongodb-replica-set-on-kubernetes/>
 - [x] <https://medium.com/faun/scaling-mongodb-on-kubernetes-32e446c16b82>
