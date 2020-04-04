@@ -1,7 +1,7 @@
 # Home office tasks
 
 Home office
-[x] - Done
+[x] - Done  
 [-] - not done or could not be completed, blocker etc.
 
 ## Dag 19.3.20
