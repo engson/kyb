@@ -1,6 +1,6 @@
 # Home office tasks
 
-Home office
+Home office  
 [x] - Done
 [-] - not done or could not be completed, blocker etc.
 
@@ -38,11 +38,13 @@ Home office
 - [x] Install Vscode
   - [x] Python extension
   - [x] Yaml extension
-- [x] Follow Tutorial to learn basics of Kubernetes
+- [x] Plan workdays ahead.
+- [x] Look at flask basic tutorials.
 
 ## Dag 20.3.20
 
 - [x] Kubernetes architecture overview: <https://www.youtube.com/watch?v=8C_SCDbUJTg>
+- [x] Follow Tutorial to learn basics of Kubernetes
 - [x] Follow Basic Tutorial: <https://api.mongodb.com/python/current/tutorial.html>
 - [x] Setup Mongodb client
   - [x] Install mongodb: <https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/>
@@ -159,7 +161,6 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 
 ## Dag 31.03.20
 
-- Standup : Scalering av mongodb, hvordan sende queries fra andre poder. Lese litt på Helm.
 - [x] <https://kubernetes.io/docs/tasks/run-application/run-replicated-stateful-application/>
 - [x] <https://kubernetes.io/blog/2017/01/running-mongodb-on-kubernetes-with-statefulsets/>
 - [x] <https://docs.mongodb.com/manual/replication/>
@@ -169,7 +170,6 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 
 ## Dag 01.04.20
 
-- Standup: Fortsette med det jeg drev med i går. Node drain. Hente kode fra Håvard, og bytte ut databasen.
 - [x] Fatal: Git index smaller than expected: <https://stackoverflow.com/questions/4254389/git-corrupt-loose-object/13918515#13918515?newreg=7082361fbc474a77b63e977aa8a80ff0>
 - [x] mondb-replication <https://maruftuhin.com/blog/mongodb-replica-set-on-kubernetes/>
 - [x] <https://medium.com/faun/scaling-mongodb-on-kubernetes-32e446c16b82>
@@ -213,26 +213,34 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
   - Reaching primary mongodb <https://github.com/helm/charts/issues/1569>
   - `db.getSiblingDB("mongo"); use mongo; db.post.find()` i master
   - `db.getSiblingDB("mongo"); use mongo; db.setSlaveOk();db.post.find()`
+  - [x] Added replicaSet as parameter to when init_mongodb.
   
 - [-] Setup statefull database and write using master node and read using slaves.
-  - [] Fix loadbalander not selecting only master on write operations.
+  - [-] Fix loadbalander not selecting only master on write operations.
+  - [-] Potential fix, need a load-balancer that handles each mongo query, instead of calling Client directly from flask application endpoints.
 - [-] Helm init
   - [x] Install Helm and Tiller <https://www.digitalocean.com/community/tutorials/how-to-install-software-on-kubernetes-clusters-with-the-helm-2-package-manager>
 
-## Day 06.04.20 9:20 - 17:20
+## Day 06.04.20
 
-- [] Create your first helm chart <https://docs.bitnami.com/tutorials/create-your-first-helm-chart/>
-- [] Helm
-- [] Helm charts
+- [x] Create your first helm chart <https://docs.bitnami.com/tutorials/create-your-first-helm-chart/>
+  - `helm init --wait` if tiller not availible
+  - `helm install --name=example ./mychart --set service.type=NodePort` deploy chart to kuberentes
+    - Follow steps from Notes to see application.
+- [x] Autocompletion heml <https://helm.sh/docs/helm/helm_completion/>
+- [x] Upgrade helm from 2-3 <https://helm.sh/docs/topics/v2_v3_migration/>
+- [x] Using Helm Documentation <https://helm.sh/docs/intro/using_helm/>
+
+## Day 07.4.20
+
+- [] Create chart from kubernetes project.
 
 ### Backlog
 
 - [ ] Setup feature flags on kubernetes  
 - [ ] Setup feature flags on flask  
-- [ ] Setup Flask Backend  
-- [ ] Setup Flask Frontend  
+- [ ] Setup Flask Frontend (Flask megatutorial)
 - [ ] Setup Redis with mongodb  
-- [ ] Connect Backend with Frontend  
 - [ ] Setup keycloak.
 - [ ] Prometheus monitoring Kubernetes. <https://sysdig.com/blog/kubernetes-monitoring-prometheus/>
 - [ ] Feature toggling.
@@ -245,12 +253,96 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 
 ## Helm
 
-`heml install myapp` Deploy application to kubernetes with helm config
-`heml upgrade mypp` Update application on kubernetes with upgrade helm config.
-`helm rollback version...` Rollback to previous configuration history.
-`helm package` to semd helm chart to repo, to make reusability easier.
-`helm create <name>` Create new chart example template folder.
-`helm init --wait` Installs Tiller onto Kubernetes Cluster and sets up local configurations in $HELM_HOME and using the default context.
+Helm installs _charts_ into Kubernetes, creating a new _release_ for each installation. And to find new charts, you can search Helm chart _repositories_.
+
+### Repositories
+
+A _Repository_ is a place where charts can be collected and shared. Like Fedora Package Database, but for Kubernetes packages.
+
+### Commands examples
+
+`helm serve` Start a local chart repository server that serves charts from a local directory.  
+`helm search local` Will find all local repositories. This should show the result from `helm serve`.  
+Yum repo for Kubernetes projects handler. Optimize reusability of kubernetes projects.  
+
+`helm search repo` Searches the repositories that have been added to local helm client (with helm repo add). This search is over local data, thus no public network connection is needed.  
+`helm search hub` Show all the available charts.  
+The search uses fuzzy string matching algorithm with query.  
+
+`helm repo add [repo]` Add repository
+`helm repo update` Update charts in repositories.
+
+`helm repo remove [repo]` Remove repo from helm client
+
+`heml install myapp` Deploy application to kubernetes with helm config.  
+`heml upgrade mypp` Update application on kubernetes with upgrade helm config.  
+`helm rollback version...` Rollback to previous configuration history.  
+`helm package [chart]` to send helm chart to repo, to make reusability easier. Creates .tgz file.
+`helm create <name>` Create new chart example template folder.  
+`helm init --wait` Installs Tiller onto Kubernetes Cluster and sets up local configurations in $HELM_HOME and using the default context.  
+`helm lint ./helmproject` check for helm syntax errors.  
+
+`helm install --dry-run --debug ./mychart` to inspect the general definitions
+
+`helm install -f config.yaml stable/mariadb --generate-name` Run chart with overwritten config file, generate name automaticly
+
+`helm package ./mychart` Package a chart into a versioned chart archive file. A .tgz file.
+This can be used to start a new helm chart instance directly, instead of from local directory.
+`helm install --name=<name> mychart-<version>.tgz --set service.type=NodePort`
+
+`helm list` Show all running releases
+
+`helm show values <repo>/<chart>` to see what are configurable on a chart,
+e.g. `helm show values bitnami/pytorch`
+
+`helm get values <release>` to ses overwritten configuration of a release.
+
+`helm upgrade -f panda.yaml mariadb-1586182515 bitnami/mariadb` Change configuration to a release. Helm tries to perform the least invasive upgrade, and only update things that have changed since the last release.
+
+`helm rollback [release] [revision]` first revision always start at 1, and increments by 1 for each update/install or rollback.
+`helm rollback <release> 1` to rollback a release to previous configurations. In this case first configuration version
+
+`helm history [release]` to see history of a release.
+
+`helm uninstall [release]` Removes release from the cluster. 
+
+### Helm charts
+
+A _chart_ is a Helm package. It contains all the resource definitions necessary to run an application, tool, or service inside of a Kubernetes cluster. Like a Yum RPM file.
+Keep track of a set of kubernetes resources (pods, deployments, services etc) in the project.
+
+A _Release_ is an instance of a chart running in a Kubernetes cluster. A chart can be installed many tiles into the same cluster. With each installation, a new _release_ is created.
+
+parameters settings for easy of resuse.
+
+### Config files
+
+`--values or -f` specifies a YAML file with overrides. Rightmostfile will take precedence. `--set` have higher precedence.
+
+`--set` accepts settings in equvivalent yaml format.
+`--set a=b,c=d`  
+
+```yaml
+a: b
+c: d
+```
+
+`--set servers[0].port=80,servers[0].host=example`
+
+```yaml
+servers:
+  - port: 80
+    host: example
+```
+
+With escape characters on '.'
+`--set NodeSelector."Kubernetes\.io/role"=master`
+
+```yaml
+NodeSelector:
+  kubernetes.io/role: master
+```
+
 
 ### Tiller
 
@@ -260,6 +352,12 @@ Service component of helm. Takes command sent to cli client and turn them into s
 
 Holds YAML definitions for Services, Deployments and other Kubernetes objects.
 Each file in this directory is run through a Go template rendering engine before running the kybernetes project. This rendering includes variable computation, logical completion among other things.
+
+__.Chart__ provide metadata about the chart to your definitions such as the name, or version.
+__.Values__ used to expose configurations that can be set at the time of deployment. 
+__NOTES.txt__ printed out after a chart is successfully deployed, usefull to desribe steps to run chart, and give information like runtime ip.
+
+
 
 ## Kubernetes Architecture
 
