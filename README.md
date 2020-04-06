@@ -219,8 +219,9 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 - [-] Helm init
   - [x] Install Helm and Tiller <https://www.digitalocean.com/community/tutorials/how-to-install-software-on-kubernetes-clusters-with-the-helm-2-package-manager>
 
-## Day 06.04.20
+## Day 06.04.20 9:20 - 17:20
 
+- [] Create your first helm chart <https://docs.bitnami.com/tutorials/create-your-first-helm-chart/>
 - [] Helm
 - [] Helm charts
 
@@ -244,22 +245,29 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 
 ## Helm
 
-### Tiller
-
-Service component of helm. Takes command sent to cli client and turn them into something the kubernetes kluster will understand.
-
 `heml install myapp` Deploy application to kubernetes with helm config
 `heml upgrade mypp` Update application on kubernetes with upgrade helm config.
 `helm rollback version...` Rollback to previous configuration history.
 `helm package` to semd helm chart to repo, to make reusability easier.
+`helm create <name>` Create new chart example template folder.
+`helm init --wait` Installs Tiller onto Kubernetes Cluster and sets up local configurations in $HELM_HOME and using the default context.
 
-### Kubernetes Architecture
+### Tiller
+
+Service component of helm. Takes command sent to cli client and turn them into something the kubernetes kluster will understand.
+
+### Templates
+
+Holds YAML definitions for Services, Deployments and other Kubernetes objects.
+Each file in this directory is run through a Go template rendering engine before running the kybernetes project. This rendering includes variable computation, logical completion among other things.
+
+## Kubernetes Architecture
 
 <https://phoenixnap.com/kb/understanding-kubernetes-architecture-diagrams>
 
 ![kubernetes architecture](images/full-kubernetes-model-architecture.png)
 
-#### Deployments
+### Deployments
 
 An Api object that manages a replicated application.  
 Provides declarative updates for Pods and ReplicateSets(replica set of pods)
