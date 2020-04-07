@@ -1,7 +1,7 @@
 # Home office tasks
 
 Home office  
-[x] - Done
+[x] - Done  
 [-] - not done or could not be completed, blocker etc.
 
 ## Dag 19.3.20
@@ -233,15 +233,30 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 
 ## Day 07.4.20
 
-- [] Create chart from kubernetes project.
+- [x] Using helm and Kubernetes <https://www.baeldung.com/kubernetes-helm>
+  - Create helm repo on github
+    - `helm package ./[helm_chart]`
+    - `helm repo index my-repo/ --url https://[username].github.io/my-repo`
+    Testing
+    - `helm repo add my-repo https://[username].github.io/my-repo`
+    - `helm install my-repo/hello-world --name=hello-world`
+- [x] Helm from basics to advanced <https://banzaicloud.com/blog/creating-helm-charts/>
+- [-] Helm from basics to advanced part-2 <https://banzaicloud.com/blog/creating-helm-charts-part-2/>
+- [x] Python REST APIs With Flask, Connexion, and SQLAlchemy <https://realpython.com/flask-connexion-rest-api/>
+- [-] Setup OpenAPI flask configurations (swagger codegen). <https://medium.com/@hmajid2301/implementing-a-simple-rest-api-using-openapi-flask-connexions-1bdd01ca916>
+<https://dev.to/hmajid2301/implementing-a-simple-rest-api-using-openapi-flask-connexions-28kk>
 
 ### Backlog
 
+- [] Create chart from flask-vue-mongod project.
 - [ ] Setup feature flags on kubernetes  
 - [ ] Setup feature flags on flask  
 - [ ] Setup Flask Frontend (Flask megatutorial)
 - [ ] Setup Redis with mongodb  
 - [ ] Setup keycloak.
+- [ ] Setup OpenAPI flask configurations (swagger codegen). <https://medium.com/@hmajid2301/implementing-a-simple-rest-api-using-openapi-flask-connexions-1bdd01ca916>
+<https://dev.to/hmajid2301/implementing-a-simple-rest-api-using-openapi-flask-connexions-28kk>
+
 - [ ] Prometheus monitoring Kubernetes. <https://sysdig.com/blog/kubernetes-monitoring-prometheus/>
 - [ ] Feature toggling.
 - [ ] Feature gates <https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/>
@@ -304,16 +319,14 @@ e.g. `helm show values bitnami/pytorch`
 
 `helm history [release]` to see history of a release.
 
-`helm uninstall [release]` Removes release from the cluster. 
+`helm uninstall [release]` Removes release from the cluster.
 
 ### Helm charts
 
 A _chart_ is a Helm package. It contains all the resource definitions necessary to run an application, tool, or service inside of a Kubernetes cluster. Like a Yum RPM file.
 Keep track of a set of kubernetes resources (pods, deployments, services etc) in the project.
 
-A _Release_ is an instance of a chart running in a Kubernetes cluster. A chart can be installed many tiles into the same cluster. With each installation, a new _release_ is created.
-
-parameters settings for easy of resuse.
+A _Release_ is an instance of a chart running in a Kubernetes cluster. A chart can be installed many times into the same cluster. With each installation, a new _release_ is created.
 
 ### Config files
 
@@ -343,6 +356,13 @@ NodeSelector:
   kubernetes.io/role: master
 ```
 
+_required_ option will make parameter required. `{{ required "A valid foo is required!" .Values.foo }}`  
+Identation. Can be piped in. `{{ .Values.annotations | indent 4 }}`
+More readable alternative nindent, newline + indent.  
+`annotations: {{ .Values.annotations | nindent 4 }}`
+Default values can be provided with pipe. `{{ .Values.name | default  (include "chart.name" .) }}`
+Whitespace removal with the `{{-` chomp preceding whitespace, or `-}}` to chomp ensuing whitespace.
+
 
 ### Tiller
 
@@ -356,8 +376,9 @@ Each file in this directory is run through a Go template rendering engine before
 __.Chart__ provide metadata about the chart to your definitions such as the name, or version.
 __.Values__ used to expose configurations that can be set at the time of deployment. 
 __NOTES.txt__ printed out after a chart is successfully deployed, usefull to desribe steps to run chart, and give information like runtime ip.
-
-
+__templates__ This is the directory where Kubernetes resources are defined as templates
+__charts__ This is an optional directory that may contain sub-charts.
+__.helmignore__ Define patterns that helm ignore when packaging (like .gitignore).
 
 ## Kubernetes Architecture
 
