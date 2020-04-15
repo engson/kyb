@@ -1,0 +1,6 @@
+python_version>="3.6"
+Flask==1.1.1
+openapi-spec-validator==0.2.8
+requests==2.23.0
+connexion[swagger-ui]==2.6.0
+python_dateutil >= 2.6.0

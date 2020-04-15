@@ -246,9 +246,29 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 - [-] Setup OpenAPI flask configurations (swagger codegen). <https://medium.com/@hmajid2301/implementing-a-simple-rest-api-using-openapi-flask-connexions-1bdd01ca916>
 <https://dev.to/hmajid2301/implementing-a-simple-rest-api-using-openapi-flask-connexions-28kk>
 
+## Day 15.04.20
+
+- [x] Setup OpenAPI flask configurations (swagger codegen). <https://medium.com/@hmajid2301/implementing-a-simple-rest-api-using-openapi-flask-connexions-1bdd01ca916>
+<https://dev.to/hmajid2301/implementing-a-simple-rest-api-using-openapi-flask-connexions-28kk>
+- [x] Setting up flask in docker container.
+- [] Flask deployment options
+- [x] OAuth 2.0: An Overview <https://www.youtube.com/watch?v=CPbvxxslDTU>
+- [x] Understanding Oauth2 <https://www.youtube.com/watch?v=f36s7KtnUD4>
+- [-] Performance tests <https://medium.com/@peter.jp.xie/scale-up-rest-api-functional-tests-to-performance-tests-in-python-3239859c0e27>
+
+## Day 16.04.20
+
+- [] Flask-connexion <https://github.com/hjacobs/connexion-example>
+- [] Setup Flask-connexion in kubernetes
+- [] Setup OAuth2 support in Flask <https://flask-oauthlib.readthedocs.io/en/latest/oauth2.html>
+- [] Setup Mongodb database
+- [] Setup Gunicorn support
+- [] Setup Promethious logging of Pods
+- [] Setup Performance Tests in Kubernetes
+
 ### Backlog
 
-- [] Create chart from flask-vue-mongod project.
+- [ ] Create chart from flask-vue-mongod project.
 - [ ] Setup feature flags on kubernetes  
 - [ ] Setup feature flags on flask  
 - [ ] Setup Flask Frontend (Flask megatutorial)
@@ -265,6 +285,10 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 - [ ] grafana <https://medium.com/faun/kubernetes-multi-cluster-monitoring-using-prometheus-and-thanos-7549a9b0d0ae>
 - [ ] Sikkere mongodb replicaset <http://pauldone.blogspot.com/2017/06/deploying-mongodb-on-kubernetes-gke25.html>
 - [ ] Zookeper?
+- [ ] Flask deployment <https://flask.palletsprojects.com/en/1.1.x/deploying/>
+- [ ] Combining PIP anv virtual enviroments using Pipenv <https://github.com/pypa/pipenv>
+- [ ] Gevent async I/O <https://iximiuz.com/en/posts/flask-gevent-tutorial/>
+- [] Readiness and Liveness probes in kubernetes <https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/>
 
 ## Helm
 
@@ -363,7 +387,6 @@ More readable alternative nindent, newline + indent.
 Default values can be provided with pipe. `{{ .Values.name | default  (include "chart.name" .) }}`
 Whitespace removal with the `{{-` chomp preceding whitespace, or `-}}` to chomp ensuing whitespace.
 
-
 ### Tiller
 
 Service component of helm. Takes command sent to cli client and turn them into something the kubernetes kluster will understand.
@@ -374,7 +397,7 @@ Holds YAML definitions for Services, Deployments and other Kubernetes objects.
 Each file in this directory is run through a Go template rendering engine before running the kybernetes project. This rendering includes variable computation, logical completion among other things.
 
 __.Chart__ provide metadata about the chart to your definitions such as the name, or version.
-__.Values__ used to expose configurations that can be set at the time of deployment. 
+__.Values__ used to expose configurations that can be set at the time of deployment.
 __NOTES.txt__ printed out after a chart is successfully deployed, usefull to desribe steps to run chart, and give information like runtime ip.
 __templates__ This is the directory where Kubernetes resources are defined as templates
 __charts__ This is an optional directory that may contain sub-charts.
@@ -615,3 +638,17 @@ __Selecter__ filter out wich PV to use from the PVC.
 ### Cluster
 
 Set of node machines running containerized applications.
+
+## OAuth2
+
+Enables a third-party application to obtain limited access to an HTTP service, either on behalf of a resource owner by orchestrating an approval intrection between the resource owner and the HTTP service, or by allowing the third-party application to obtain access on its own behalf.
+
+__user__ is the Resource Owner.
+
+OAuth2 key points.
+
+- Is a good standard for implementing an authorization system
+- Has many different grant types for different use cases
+- Needs to be combined with an authentication mechanism
+- Defines squishy boundaries, that you need to be explicit about
+- Can help you to centralize the auth system in your organization
