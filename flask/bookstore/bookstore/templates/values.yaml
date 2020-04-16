@@ -1,0 +1,23 @@
+# progressDeadlineSeconds
+# replicaCount
+
+images:
+  repository: null
+  pullPolicy: null
+
+version: v1.0
+
+service:
+	type: "default_type"
+	internalPort: 9001
+	externalPort: 9001
+
+securityContext: {
+	runAsNonRoot: true
+}
+
+livenessProbe: true
+
+readinessProbe: true
+
+resources: {}

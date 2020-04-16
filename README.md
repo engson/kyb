@@ -198,7 +198,7 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 
 ```s
   podman login --username <username> docker.io # key from docker.io as password.
-  podman build -t <image-tag?> <location>
+  podman build -t <image-tag> <location>
   podman push localhost/<image-tag> <username>/<image-repo>[:]<optional-version-tag>
   # set image tag in yaml to repo image to use.
   image: <username>/<image-repo>[:]<optional-version-tag>
@@ -258,16 +258,23 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 
 ## Day 16.04.20
 
-- [] Flask-connexion <https://github.com/hjacobs/connexion-example>
-- [] Setup Flask-connexion in kubernetes
-- [] Setup OAuth2 support in Flask <https://flask-oauthlib.readthedocs.io/en/latest/oauth2.html>
-- [] Setup Mongodb database
-- [] Setup Gunicorn support
-- [] Setup Promethious logging of Pods
-- [] Setup Performance Tests in Kubernetes
+Start arbeid på helm-chart for flask-connexion prosjekt
+Bygge containere, og pushe opp til docker hub repo.
+
+- [x] Flask-connexion <https://github.com/hjacobs/connexion-example>
+- [-] Setup Flask-connexion in kubernetes
+
+## Day 17.04.20
+
+- [] <https://github.com/thedataincubator/flask-chart/blob/master/flask-chart/templates/deployment.yaml>
 
 ### Backlog
 
+- [ ] Setup OAuth2 support in Flask <https://flask-oauthlib.readthedocs.io/en/latest/oauth2.html>
+- [ ] Setup Mongodb database
+- [ ] Setup Gunicorn support
+- [ ] Setup Promethious logging of Pods
+- [ ] Setup Performance Tests in Kubernetes
 - [ ] Create chart from flask-vue-mongod project.
 - [ ] Setup feature flags on kubernetes  
 - [ ] Setup feature flags on flask  

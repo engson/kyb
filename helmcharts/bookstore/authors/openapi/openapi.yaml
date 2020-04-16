@@ -1,0 +1,83 @@
+openapi: "3.0.0"
+info:
+  title: OpenAPI Author Library
+  version: "1.0"
+servers:
+  - url: /v1.0
+    description: relative path example
+
+paths:
+  /authors:
+    get:
+      summary: List all authors
+      operationId: controllers.authors_controller.read_all_authors
+      tags:
+        - authors
+      responses:
+        '200':
+          description: A array of authors
+          content: {}
+    post:
+      summary: Insert author
+      operationId: controllers.authors_controller.create
+      tags:
+        - authors
+      requestBody:
+          description: Author to create
+          required: True
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fname:
+                    type: string
+                  lname:
+                    type: string
+                  age:
+                    type: integer
+                    format: int32
+                  city:
+                    type: string
+                    description: The location of author
+                  email:
+                    type: string
+                    description: the author email
+      responses:
+        '201':
+          description: Inserted author
+          content: {}
+        '400':
+          description: Bad insert request
+          content: {}
+
+  /authors/{email}:
+    get:
+      summary: List one author
+      operationId: controllers.authors_controller.read_one
+      tags:
+        - authors
+      parameters:
+        - description: The email of the author to read
+          in: path
+          name: email
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An author in json format
+          content: {}
+    delete:
+      summary: Author to delete
+      operationId: controllers.authors_controller.delete
+      parameters:
+        - description: The email of the author to delete
+          in: path
+          name: email
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "Successfull deletion" 
