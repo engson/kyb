@@ -7,6 +7,14 @@ servers:
     description: Dev server
 
 paths:
+  /health:
+    get:
+      summary: Get health of service
+      operationId: controllers.books_controller.health
+      responses:
+        '200':
+          description: A string response
+          content: {}
   /books:
     get:
       summary: List all books

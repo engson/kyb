@@ -262,16 +262,28 @@ Start arbeid på helm-chart for flask-connexion prosjekt
 Bygge containere, og pushe opp til docker hub repo.
 
 - [x] Flask-connexion <https://github.com/hjacobs/connexion-example>
-- [-] Setup Flask-connexion in kubernetes
+- [x] Setup Flask-connexion in kubernetes
+- [-] Setup Flask-connexion in helm
 
-## Day 17.04.20
+## Day 17.04.20 16:40 PAUSE
 
-- [] <https://github.com/thedataincubator/flask-chart/blob/master/flask-chart/templates/deployment.yaml>
+bookstore.
+Helk config filer
+
+- [x] Setup Flask-connexion in helm
+- [x] <https://github.com/thedataincubator/flask-chart/blob/master/flask-chart/templates/deployment.yaml>
+  - `helm install --dry-run --debug ./mychart`
+  - `helm install mydemo ./mychart/ --debug --dry-run`
+- [x] Enable ingress
+  `minikube addons enable ingress`
+  `echo "<NODE-IP> <HOST>" > /etc/hosts`
+- [x] Multiple containers from same helm chart.
+  - `helm install mydemo-authors -f values-authors.yaml . --debug`
+  - `helm install mydemo-books -f values-books.yaml . --debug`
 
 ### Backlog
 
 - [ ] Setup OAuth2 support in Flask <https://flask-oauthlib.readthedocs.io/en/latest/oauth2.html>
-- [ ] Setup Mongodb database
 - [ ] Setup Gunicorn support
 - [ ] Setup Promethious logging of Pods
 - [ ] Setup Performance Tests in Kubernetes
@@ -295,7 +307,8 @@ Bygge containere, og pushe opp til docker hub repo.
 - [ ] Flask deployment <https://flask.palletsprojects.com/en/1.1.x/deploying/>
 - [ ] Combining PIP anv virtual enviroments using Pipenv <https://github.com/pypa/pipenv>
 - [ ] Gevent async I/O <https://iximiuz.com/en/posts/flask-gevent-tutorial/>
-- [] Readiness and Liveness probes in kubernetes <https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/>
+- [ ] Readiness and Liveness probes in kubernetes <https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/>
+- [ ] Git diff terminal
 
 ## Helm
 

@@ -1,65 +1,55 @@
+# Default values for bookstore.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
 
 replicaCount: 1
 
-image:
-  repository: sondreweb/authors-backend
-  tag: latest
-  pullPolicy: Always
-
-service:
-  name: flask
-  externalPort: 9002
-  internalPort: 9002
-  type: NodePort
+images:
+  repository: nginx
+  pullPolicy: IfNotPresent
 
 imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: false
+  create: true
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name:
 
-podSecurityContext:
-  #allowPrivilegeEscalation: false
-  #runAsUser: 2000
-  #
+podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext: 
-  readOnlyRootFilesystem: true
-  runAsNonRoot: true
-  runAsUser: 1000
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
 
+service:
+  type: ClusterIP
+  port: 80
 
 ingress:
-  enabled: true
+  enabled: false
   annotations: {}
-    # nginx.ingress.kubernetes.io/ssl-redirect: "false"
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
-    # nginx.ingress.kubernetes.io/rewrite-target: /$0 # rewrites /host-path/ex/ab to /host-path/ab
-    # nginx.ingress.kubernetes.io/rewrite-target: /$1
   hosts:
-    - host: bookstore.local
-      paths: 
-        - /
-      
+    - host: chart-example.local
+      paths: []
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
 
-resources:
-  limits:
-    cpu: 100m
-    memory: 128Mi
-  requests:
-    cpu: 100m
-    memory: 128Mi
+resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -71,13 +61,8 @@ resources:
   #   cpu: 100m
   #   memory: 128Mi
 
- # DEPLOYMENT
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
-
-livenessProbe: false
-
-readinessProbe: false

@@ -44,7 +44,7 @@ ingress:
     # nginx.ingress.kubernetes.io/rewrite-target: /$0 # rewrites /host-path/ex/ab to /host-path/ab
     # nginx.ingress.kubernetes.io/rewrite-target: /$1
   hosts:
-    - host: bookstore.local
+    - host: authors.local
       paths: 
         - /
       

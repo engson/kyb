@@ -7,6 +7,8 @@ from flask import make_response, abort, request
 def get_timestamp():
     return datetime.utcnow().isoformat()
 
+def health():
+    return "pong"
 AUTHORS = {
     "abc@live.in":{
         "fname":"Per",

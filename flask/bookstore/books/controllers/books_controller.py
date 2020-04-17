@@ -6,6 +6,9 @@ from flask import make_response, abort, request
 def get_timestamp():
     return datetime.utcnow().isoformat()
 
+def health():
+    return "pong"
+
 BOOKS = {
     "book_name_1":{
         "name":"book_name_1",

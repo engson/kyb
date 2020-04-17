@@ -1,5 +1,0 @@
-{
-  image.repository: sondreweb/authors-backend:latest,
-  server.port: 9001
-}
-

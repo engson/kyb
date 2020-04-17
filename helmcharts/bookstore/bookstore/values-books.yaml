@@ -2,14 +2,14 @@
 replicaCount: 1
 
 image:
-  repository: sondreweb/authors-backend
+  repository: sondreweb/books-backend
   tag: latest
   pullPolicy: Always
 
 service:
   name: flask
-  externalPort: 9002
-  internalPort: 9002
+  externalPort: 9001
+  internalPort: 9001
   type: NodePort
 
 imagePullSecrets: []
@@ -44,7 +44,7 @@ ingress:
     # nginx.ingress.kubernetes.io/rewrite-target: /$0 # rewrites /host-path/ex/ab to /host-path/ab
     # nginx.ingress.kubernetes.io/rewrite-target: /$1
   hosts:
-    - host: bookstore.local
+    - host: books.local
       paths: 
         - /
       

@@ -7,6 +7,14 @@ servers:
     description: relative path example
 
 paths:
+  /health:
+    get:
+      summary: Get health of service
+      operationId: controllers.authors_controller.health
+      responses:
+        '200':
+          description: A string response
+          content: {}
   /authors:
     get:
       summary: List all authors
