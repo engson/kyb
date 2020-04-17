@@ -223,6 +223,8 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 
 ## Day 06.04.20
 
+Fortsette med helm charts. Helm commandolinjen. Hvordan hente charts fra andre repoer.
+
 - [x] Create your first helm chart <https://docs.bitnami.com/tutorials/create-your-first-helm-chart/>
   - `helm init --wait` if tiller not availible
   - `helm install --name=example ./mychart --set service.type=NodePort` deploy chart to kuberentes
@@ -232,6 +234,9 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 - [x] Using Helm Documentation <https://helm.sh/docs/intro/using_helm/>
 
 ## Day 07.4.20
+
+Fortsette med helm charts. Se litt mer på syntaxen på selv chart filene.
+Starte på connexion flask api
 
 - [x] Using helm and Kubernetes <https://www.baeldung.com/kubernetes-helm>
   - Create helm repo on github
@@ -248,27 +253,32 @@ podman run -dt -p 8080:8080/tcp -e HTTPD_VAR_RUN=/var/run/httpd -e HTTPD_MAIN_CO
 
 ## Day 15.04.20
 
+Fortsette med flask connexion API. Se litt på authentisering.
+
 - [x] Setup OpenAPI flask configurations (swagger codegen). <https://medium.com/@hmajid2301/implementing-a-simple-rest-api-using-openapi-flask-connexions-1bdd01ca916>
 <https://dev.to/hmajid2301/implementing-a-simple-rest-api-using-openapi-flask-connexions-28kk>
 - [x] Setting up flask in docker container.
-- [] Flask deployment options
+- [-] Flask deployment options
 - [x] OAuth 2.0: An Overview <https://www.youtube.com/watch?v=CPbvxxslDTU>
 - [x] Understanding Oauth2 <https://www.youtube.com/watch?v=f36s7KtnUD4>
 - [-] Performance tests <https://medium.com/@peter.jp.xie/scale-up-rest-api-functional-tests-to-performance-tests-in-python-3239859c0e27>
 
 ## Day 16.04.20
 
-Start arbeid på helm-chart for flask-connexion prosjekt
+Start arbeid på helm-chart for flask-connexion prosjekt.
 Bygge containere, og pushe opp til docker hub repo.
 
 - [x] Flask-connexion <https://github.com/hjacobs/connexion-example>
 - [x] Setup Flask-connexion in kubernetes
 - [-] Setup Flask-connexion in helm
 
-## Day 17.04.20 16:40 PAUSE
+## Day 17.04.20
 
-bookstore.
-Helk config filer
+Forsette med flask-connexion kubernetes helm charts.
+Deploye forskjellige APi-er med denne via forskjellige values.yaml filer.
+
+helm-bookstore.
+Helm config filer
 
 - [x] Setup Flask-connexion in helm
 - [x] <https://github.com/thedataincubator/flask-chart/blob/master/flask-chart/templates/deployment.yaml>
@@ -280,6 +290,11 @@ Helk config filer
 - [x] Multiple containers from same helm chart.
   - `helm install mydemo-authors -f values-authors.yaml . --debug`
   - `helm install mydemo-books -f values-books.yaml . --debug`
+
+## Day 20.04.20
+
+- [] Prometius.
+- [] Sette opp mongodb chart.
 
 ### Backlog
 
