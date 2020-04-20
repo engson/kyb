@@ -293,8 +293,10 @@ Helm config filer
 
 ## Day 20.04.20
 
-- [] Prometius.
-- [] Sette opp mongodb chart.
+- [x] Dockercon 17, what is Prometheus, on docker <https://www.youtube.com/watch?v=PDxcEzu62jk>
+- [ ] Prometius in kubernetes overview. <https://www.youtube.com/watch?v=bErGEHf6GCc>
+- [ ] Prometheus monitoring Kubernetes. <https://sysdig.com/blog/kubernetes-monitoring-prometheus/>
+- [ ] Sette opp mongodb chart.
 
 ### Backlog
 
@@ -311,7 +313,7 @@ Helm config filer
 - [ ] Setup OpenAPI flask configurations (swagger codegen). <https://medium.com/@hmajid2301/implementing-a-simple-rest-api-using-openapi-flask-connexions-1bdd01ca916>
 <https://dev.to/hmajid2301/implementing-a-simple-rest-api-using-openapi-flask-connexions-28kk>
 
-- [ ] Prometheus monitoring Kubernetes. <https://sysdig.com/blog/kubernetes-monitoring-prometheus/>
+
 - [ ] Feature toggling.
 - [ ] Feature gates <https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/>
 - [ ] K9 Kubectl improved?
@@ -324,6 +326,48 @@ Helm config filer
 - [ ] Gevent async I/O <https://iximiuz.com/en/posts/flask-gevent-tutorial/>
 - [ ] Readiness and Liveness probes in kubernetes <https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/>
 - [ ] Git diff terminal
+
+## Prometheus
+
+### Querying
+
+Functional language query, not SQL.
+
+Get error rate of all http request paths for the last 5 minutes.
+
+``` prometheus
+sum by(path) (rate(http_requests_total{status="500"}[5m])) / sum by(path) (rate(http_requests_total[5m]))
+```
+
+99th percentile request latencey across all instances.
+
+```p
+histogram_quantile(0.99,
+  sum without(instance) (rate(request_latency_seconds_bucket[5m]))
+)
+```
+
+Expression browser, test expressions against latest values. Afterwarda graph these results in Graphana.
+
+### Alerting
+
+All paths with an error_rate ratio greater than 5 percent. ALl will become an alert that inherits the label of its timeseries.
+
+```p
+ALERT Many500Errors
+IF
+  (
+    sum by(path) (rate(http_requests_total{status="500"}[5m]))
+    / sum by(path) (rate(http_requests_total)[5m])
+  ) * 100 > 5
+FOR 5m
+LABELS {
+  severity = "critical"
+}
+ANNOTATIONS {
+  summary = "Many 500 errors for path {{$labels.path}} ({{$value}}%)"
+}
+```
 
 ## Helm
 
